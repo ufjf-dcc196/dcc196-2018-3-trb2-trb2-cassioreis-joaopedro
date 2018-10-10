@@ -1,9 +1,11 @@
-package a20183.dcc192.trab1joaopcassio;
+package a20183.dcc192.trab1joaopcassio.Listas;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ParticipanteDAO {
+import a20183.dcc192.trab1joaopcassio.Model.Participante;
+
+public class ListaParticipantes {
 
     private static List<Participante> participantes;
 
