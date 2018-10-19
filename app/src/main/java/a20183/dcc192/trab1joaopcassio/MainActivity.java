@@ -1,5 +1,6 @@
 package a20183.dcc192.trab1joaopcassio;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -21,13 +22,15 @@ public class MainActivity extends AppCompatActivity {
         btnCadsParticipante.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(MainActivity.this, ParticipanteCads.class);
+                startActivityForResult(intent, MainActivity.CADS_PARTICIPANTE);
             }
         });
         btnCadsEvento.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(MainActivity.this, EventoCads.class);
+                startActivityForResult(intent, MainActivity.CADS_EVENTO);
             }
         });
     }
