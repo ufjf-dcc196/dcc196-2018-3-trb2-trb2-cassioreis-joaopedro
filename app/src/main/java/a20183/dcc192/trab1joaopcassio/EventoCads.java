@@ -19,12 +19,12 @@ public class EventoCads extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.cads_evento);
 
-        btnCadastrar = (Button) findViewById(R.id.btn_cadastrar);
-        txtTitulo = (EditText) findViewById(R.id.txt_titulo);
-        txtDia = (EditText) findViewById(R.id.txt_dia);
-        txtHora = (EditText) findViewById(R.id.txt_hora);
-        txtFacilitador = (EditText) findViewById(R.id.txt_facilitador);
-        txtDesc = (EditText) findViewById(R.id.txt_desc);
+        btnCadastrar = (Button) findViewById(R.id.btn_cadastrarEvento);
+        txtTitulo = (EditText) findViewById(R.id.txt_tituloCads);
+        txtDia = (EditText) findViewById(R.id.txt_diaCads);
+        txtHora = (EditText) findViewById(R.id.txt_horaCads);
+        txtFacilitador = (EditText) findViewById(R.id.txt_facilitadorCads);
+        txtDesc = (EditText) findViewById(R.id.txt_descCads);
 
         btnCadastrar.setOnClickListener(new View.OnClickListener() {
             @Override
