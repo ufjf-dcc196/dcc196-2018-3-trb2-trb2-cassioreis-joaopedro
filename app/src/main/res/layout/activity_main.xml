@@ -7,7 +7,7 @@
     tools:context=".MainActivity">
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/recyclerView"
+        android:id="@+id/rlc_participantesMain"
         android:layout_width="183dp"
         android:layout_height="426dp"
         android:layout_marginStart="8dp"
@@ -20,7 +20,7 @@
         app:layout_constraintVertical_bias="0.16" />
 
     <Button
-        android:id="@+id/btn_cadsParticipante"
+        android:id="@+id/btn_cadsParticipanteMain"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="18dp"
@@ -33,12 +33,12 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/recyclerView"
+        app:layout_constraintTop_toBottomOf="@+id/rlc_participantesMain"
         app:layout_constraintVertical_bias="1.0"
         tools:text="Candidato" />
 
     <Button
-        android:id="@+id/btn_cadsEvento"
+        android:id="@+id/btn_cadsEventoMain"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="156dp"
@@ -50,8 +50,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/btn_cadsParticipante"
-        app:layout_constraintTop_toBottomOf="@+id/recyclerView2"
+        app:layout_constraintStart_toEndOf="@+id/btn_cadsParticipanteMain"
+        app:layout_constraintTop_toBottomOf="@+id/rlc_eventoMain"
         app:layout_constraintVertical_bias="1.0"
         tools:text="Evento" />
 
@@ -65,16 +65,16 @@
         android:layout_marginEnd="306dp"
         android:layout_marginRight="306dp"
         android:layout_marginBottom="1dp"
-        app:layout_constraintBottom_toTopOf="@+id/btn_cadsParticipante"
+        app:layout_constraintBottom_toTopOf="@+id/btn_cadsParticipanteMain"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/recyclerView"
+        app:layout_constraintTop_toBottomOf="@+id/rlc_participantesMain"
         app:layout_constraintVertical_bias="0.717"
         tools:text="Cadastrar:" />
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/recyclerView2"
+        android:id="@+id/rlc_eventoMain"
         android:layout_width="177dp"
         android:layout_height="427dp"
         android:layout_marginStart="8dp"
@@ -86,7 +86,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/recyclerView"
+        app:layout_constraintStart_toEndOf="@+id/rlc_participantesMain"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.161" />
 
@@ -100,7 +100,7 @@
         android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="5dp"
-        app:layout_constraintBottom_toTopOf="@+id/recyclerView"
+        app:layout_constraintBottom_toTopOf="@+id/rlc_participantesMain"
         app:layout_constraintEnd_toStartOf="@+id/textView3"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -118,7 +118,7 @@
         android:layout_marginEnd="80dp"
         android:layout_marginRight="80dp"
         android:layout_marginBottom="1dp"
-        app:layout_constraintBottom_toTopOf="@+id/recyclerView2"
+        app:layout_constraintBottom_toTopOf="@+id/rlc_eventoMain"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/textView"
         app:layout_constraintTop_toTopOf="parent"
