@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
         rclEventos = (RecyclerView) findViewById(R.id.rlc_eventoMain);
         rclEventos.setLayoutManager(new LinearLayoutManager(this));
 
-        
+
 
         btnCadsParticipante.setOnClickListener(new View.OnClickListener() {
             @Override
