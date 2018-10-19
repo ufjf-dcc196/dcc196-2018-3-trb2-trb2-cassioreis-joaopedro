@@ -17,6 +17,11 @@
             </intent-filter>
         </activity>
         <activity android:name=".AdicionaParticipantes"></activity>
+        <activity android:name=".EventoCads"></activity>
+        <activity android:name=".EventoDet"></activity>
+        <activity android:name=".EventoInsc"></activity>
+        <activity android:name=".ParticipanteCads"></activity>
+        <activity android:name=".ParticipanteDet"></activity>
     </application>
 
 </manifest>
