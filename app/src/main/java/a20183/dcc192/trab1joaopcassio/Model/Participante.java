@@ -2,10 +2,9 @@ package a20183.dcc192.trab1joaopcassio.Model;
 
 public class Participante {
 
-    String nome,email;
-    Integer CPF;
+    String nome,email,CPF;
 
-    public Participante(String nome, String email, Integer CPF) {
+    public Participante(String nome, String email, String CPF) {
         this.nome = nome;
         this.email = email;
         this.CPF = CPF;
@@ -27,11 +26,11 @@ public class Participante {
         this.email = email;
     }
 
-    public Integer getCPF() {
+    public String getCPF() {
         return CPF;
     }
 
-    public void setCPF(Integer CPF) {
+    public void setCPF(String CPF) {
         this.CPF = CPF;
     }
 }
