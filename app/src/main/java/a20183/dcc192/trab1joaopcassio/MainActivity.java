@@ -8,11 +8,19 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
 
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+
+import a20183.dcc192.trab1joaopcassio.Model.Participante;
+
 public class MainActivity extends AppCompatActivity {
 
     private static final int CADS_EVENTO = 0, DET_EVENTO = 1, INSC_EVENTO = 2, CADS_PARTICIPANTE = 3, DET_PARTICIPANTE = 4;
     private Button btnCadsParticipante, btnCadsEvento;
     private RecyclerView rclParticipantes, rclEventos;
+    private List<Participante> participantes = new ArrayList<Participante>();
+    private participanteAdapter PAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +32,9 @@ public class MainActivity extends AppCompatActivity {
 
         rclParticipantes = (RecyclerView) findViewById(R.id.rlc_participantesMain);
         rclParticipantes.setLayoutManager(new LinearLayoutManager(this));
+        PAdapter = new participanteAdapter(participantes);
+        rclParticipantes.setAdapter(PAdapter);
+
         rclEventos = (RecyclerView) findViewById(R.id.rlc_eventoMain);
         rclEventos.setLayoutManager(new LinearLayoutManager(this));
 
