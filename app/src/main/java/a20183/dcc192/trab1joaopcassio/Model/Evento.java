@@ -4,8 +4,8 @@ import java.util.Date;
 
 public class Evento {
      String título,  facilitador , descrição;
-     Date data;
-     Date hora;
+     String data;
+    String hora;
 
     public String getTítulo() {
         return título;
@@ -15,19 +15,19 @@ public class Evento {
         this.título = título;
     }
 
-    public Date getData() {
+    public String getData() {
         return data;
     }
 
-    public void setData(Date data) {
+    public void setData(String data) {
         this.data = data;
     }
 
-    public Date getHora() {
+    public String getHora() {
         return hora;
     }
 
-    public void setHora(Date hora) {
+    public void setHora(String hora) {
         this.hora = hora;
     }
 
@@ -47,7 +47,7 @@ public class Evento {
         this.descrição = descrição;
     }
 
-    public Evento(String título, String facilitador, String descrição, Date data, Date hora) {
+    public Evento(String título, String facilitador, String descrição, String data, String hora) {
         this.título = título;
         this.facilitador = facilitador;
         this.descrição = descrição;

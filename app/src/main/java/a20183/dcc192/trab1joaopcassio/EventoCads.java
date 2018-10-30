@@ -9,7 +9,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import a20183.dcc192.trab1joaopcassio.Listas.ListaEventos;
 import a20183.dcc192.trab1joaopcassio.Listas.ListaParticipantes;
+import a20183.dcc192.trab1joaopcassio.Model.Evento;
 
 public class EventoCads extends AppCompatActivity {
 
@@ -28,12 +30,12 @@ public class EventoCads extends AppCompatActivity {
         txtHora = (EditText) findViewById(R.id.txt_horaCads);
         txtFacilitador = (EditText) findViewById(R.id.txt_facilitadorCads);
         txtDesc = (EditText) findViewById(R.id.txt_descCads);
-
         btnCadastrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 Intent resultado = new Intent();
+                Evento evento = new Evento(txtTitulo.getText().toString(),txtFacilitador.getText().toString(),txtDesc.getText().toString(),txtDia.getText().toString(),txtHora.getText().toString());
+                ListaEventos.getInstance().add(evento);
                 setResult(Activity.RESULT_OK, resultado);
                 finish();
 
