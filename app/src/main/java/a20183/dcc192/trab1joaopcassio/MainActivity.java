@@ -36,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
         PAdapter = new ParticipanteAdapter(ListaParticipantes.getInstance());
 
 
+
         //rclEventos = (RecyclerView) findViewById(R.id.rlc_eventoMain);
         //rclEventos.setLayoutManager(new LinearLayoutManager(this));
 
