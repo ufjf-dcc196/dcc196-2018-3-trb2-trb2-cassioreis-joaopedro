@@ -47,7 +47,7 @@ public class EventoAdapter  extends RecyclerView.Adapter<EventoAdapter.ViewHolde
         public TextView nome;
         public ViewHolder(final View itemView) {
             super(itemView);
-            nome = (TextView)itemView.findViewById(R.id.txt_nomeTitulo);
+            nome = (TextView)itemView.findViewById(R.id.txt_nomeTitulos);
         }
     }
 

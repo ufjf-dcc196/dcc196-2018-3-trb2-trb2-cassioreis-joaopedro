@@ -12,15 +12,17 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
+import a20183.dcc192.trab1joaopcassio.Listas.ListaEventos;
 import a20183.dcc192.trab1joaopcassio.Listas.ListaParticipantes;
 import a20183.dcc192.trab1joaopcassio.Model.Participante;
 
 public class MainActivity extends AppCompatActivity {
 
-    private static final int  CADS_PARTICIPANTE = 1;
+    private static final int  CADS_PARTICIPANTE = 1,CADS_EVENTO=2;
     private Button btnCadsParticipante, btnCadsEvento;
     private RecyclerView rclParticipantes, rclEventos;
     private ParticipanteAdapter PAdapter;
+    private EventoAdapter evAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,8 +39,10 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-        //rclEventos = (RecyclerView) findViewById(R.id.rlc_eventoMain);
-        //rclEventos.setLayoutManager(new LinearLayoutManager(this));
+        rclEventos = (RecyclerView) findViewById(R.id.rlc_eventoMain);
+        rclEventos.setLayoutManager(new LinearLayoutManager(this));
+        rclEventos.setAdapter((new EventoAdapter(ListaEventos.getInstance())));
+        evAdapter = new EventoAdapter(ListaEventos.getInstance());
 
 
         btnCadsParticipante.setOnClickListener(new View.OnClickListener() {
@@ -55,8 +59,10 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, EventoCads.class);
-             //   startActivityForResult(intent, MainActivity.CADS_EVENTO);
+                startActivityForResult(intent, MainActivity.CADS_EVENTO);
             }
         });
+
+        rclEventos.setAdapter(PAdapter);
     }
 }
