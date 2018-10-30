@@ -8,16 +8,17 @@
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rlc_participantesMain"
-        android:layout_width="183dp"
+        android:layout_width="0dp"
         android:layout_height="381dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/rlc_eventoMain"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.275" />
+        app:layout_constraintVertical_bias="0.105" />
 
     <Button
         android:id="@+id/btn_cadsParticipanteMain"
@@ -29,13 +30,13 @@
         android:layout_marginEnd="264dp"
         android:layout_marginRight="264dp"
         android:layout_marginBottom="17dp"
+        android:text="Candidato"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/rlc_participantesMain"
-        app:layout_constraintVertical_bias="1.0"
-        tools:text="Candidato" />
+        app:layout_constraintVertical_bias="1.0" />
 
     <Button
         android:id="@+id/btn_cadsEventoMain"
@@ -47,13 +48,13 @@
         android:layout_marginEnd="18dp"
         android:layout_marginRight="18dp"
         android:layout_marginBottom="17dp"
+        android:text="Evento"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@+id/btn_cadsParticipanteMain"
         app:layout_constraintTop_toBottomOf="@+id/rlc_eventoMain"
-        app:layout_constraintVertical_bias="1.0"
-        tools:text="Evento" />
+        app:layout_constraintVertical_bias="1.0" />
 
     <TextView
         android:id="@+id/textView2"
@@ -75,20 +76,17 @@
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rlc_eventoMain"
-        android:layout_width="177dp"
-        android:layout_height="376dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
+        android:layout_width="0dp"
+        android:layout_height="381dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
-        android:layout_marginBottom="136dp"
+        android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/rlc_participantesMain"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintVertical_bias="0.105" />
 
     <TextView
         android:id="@+id/textView"
@@ -97,13 +95,9 @@
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="5dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
         android:layout_marginBottom="1dp"
         android:text="@string/lista_de_nomes"
         app:layout_constraintBottom_toTopOf="@+id/rlc_participantesMain"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0"
@@ -113,15 +107,15 @@
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="16dp"
-        android:layout_marginStart="85dp"
-        android:layout_marginLeft="85dp"
-        android:layout_marginEnd="80dp"
-        android:layout_marginRight="80dp"
-        android:layout_marginBottom="1dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
         android:text="@string/lista_de_eventos"
         app:layout_constraintBottom_toTopOf="@+id/rlc_eventoMain"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@+id/textView"
+        app:layout_constraintTop_toTopOf="parent"
         tools:text="Lista de Eventos:" />
 </android.support.constraint.ConstraintLayout>

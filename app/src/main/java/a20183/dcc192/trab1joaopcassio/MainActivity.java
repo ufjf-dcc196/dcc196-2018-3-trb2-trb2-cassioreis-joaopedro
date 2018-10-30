@@ -1,5 +1,6 @@
 package a20183.dcc192.trab1joaopcassio;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -34,13 +35,13 @@ public class MainActivity extends AppCompatActivity {
 
         rclParticipantes = (RecyclerView) findViewById(R.id.rlc_participantesMain);
         rclParticipantes.setLayoutManager(new LinearLayoutManager(this));
-        rclParticipantes.setAdapter((new ParticipanteAdapter(ListaParticipantes.getInstance())));
         PAdapter = new ParticipanteAdapter(ListaParticipantes.getInstance());
+        rclParticipantes.setAdapter(PAdapter);
 
         rclEventos = (RecyclerView) findViewById(R.id.rlc_eventoMain);
         rclEventos.setLayoutManager(new LinearLayoutManager(this));
-        rclEventos.setAdapter((new EventoAdapter(ListaEventos.getInstance())));
         evAdapter = new EventoAdapter(ListaEventos.getInstance());
+        rclEventos.setAdapter(evAdapter);
 
         btnCadsParticipante.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -60,5 +61,16 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if(requestCode == MainActivity.CADS_PARTICIPANTE && resultCode == Activity.RESULT_OK) {
+            PAdapter.notifyDataSetChanged();
+        }
+        if(requestCode == MainActivity.CADS_EVENTO && resultCode == Activity.RESULT_OK) {
+            evAdapter.notifyDataSetChanged();
+        }
     }
 }
