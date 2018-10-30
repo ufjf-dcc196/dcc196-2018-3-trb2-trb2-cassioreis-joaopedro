@@ -52,7 +52,7 @@ class ParticipanteAdapter extends RecyclerView.Adapter<ParticipanteAdapter.ViewH
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int position) {
-        viewHolder.nome.setText(participantes.get(position).getNome());
+        viewHolder.txtNome.setText(participantes.get(position).getNome());
 
     }
 
@@ -61,21 +61,13 @@ class ParticipanteAdapter extends RecyclerView.Adapter<ParticipanteAdapter.ViewH
         return participantes.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
-        public TextView nome;
+    class ViewHolder extends RecyclerView.ViewHolder implements View.OnLongClickListener, View.OnClickListener {
+
+        public TextView txtNome;
+
         public ViewHolder(final View itemView) {
             super(itemView);
-            nome = (TextView)itemView.findViewById(R.id.txt_nomeTitulo);
-        }
-    }
-
-    class viewHolder extends RecyclerView.ViewHolder implements View.OnLongClickListener, View.OnClickListener {
-
-        public TextView txtNomeTitulo;
-
-        public viewHolder(final View itemView) {
-            super(itemView);
-            txtNomeTitulo = (TextView) itemView.findViewById(R.id.txt_nomeTitulo);
+            txtNome = (TextView) itemView.findViewById(R.id.txt_nomeTitulo);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
