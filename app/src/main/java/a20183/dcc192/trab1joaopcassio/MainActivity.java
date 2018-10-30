@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
+import a20183.dcc192.trab1joaopcassio.Listas.ListaParticipantes;
 import a20183.dcc192.trab1joaopcassio.Model.Participante;
 
 public class MainActivity extends AppCompatActivity {
@@ -21,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView rclParticipantes, rclEventos;
     private List<Participante> participantes = new ArrayList<Participante>();
     private participanteAdapter PAdapter;
+    private ListaParticipantes participantesDAO;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

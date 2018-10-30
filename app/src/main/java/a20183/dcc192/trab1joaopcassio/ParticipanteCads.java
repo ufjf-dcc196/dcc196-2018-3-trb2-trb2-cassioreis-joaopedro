@@ -8,6 +8,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import a20183.dcc192.trab1joaopcassio.Listas.ListaParticipantes;
+import a20183.dcc192.trab1joaopcassio.Model.Participante;
+
 public class ParticipanteCads extends AppCompatActivity {
 
     private Button btnCadastrar;
@@ -28,6 +31,9 @@ public class ParticipanteCads extends AppCompatActivity {
             public void onClick(View v) {
 
                 Intent resultado = new Intent();
+                Participante participante = new Participante(txtNome.getText().toString(),txtCpf.getText().toString(),txtEmail.getText().toString());
+                ListaParticipantes.getInstance().add(participante);
+
                 setResult(Activity.RESULT_OK, resultado);
                 finish();
 

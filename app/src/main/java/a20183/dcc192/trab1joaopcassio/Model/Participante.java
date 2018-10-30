@@ -10,6 +10,9 @@ public class Participante {
         this.CPF = CPF;
     }
 
+    public Participante(){
+
+    }
     public String getNome() {
         return nome;
     }
