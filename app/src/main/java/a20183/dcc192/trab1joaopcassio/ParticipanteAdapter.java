@@ -15,6 +15,7 @@ import a20183.dcc192.trab1joaopcassio.Model.Participante;
 class ParticipanteAdapter extends RecyclerView.Adapter<ParticipanteAdapter.ViewHolder> {
 
     private List<Participante> participantes;
+    private OnPartClickListener listener;
 
     public ParticipanteAdapter(List<Participante> participantes)
     {
@@ -30,6 +31,13 @@ class ParticipanteAdapter extends RecyclerView.Adapter<ParticipanteAdapter.ViewH
         View participanteView =inflater.inflate(R.layout.rcl_layout, viewGroup, false);
         ViewHolder viewHolder = new ViewHolder(participanteView);
         return viewHolder;
+    }
+
+    public interface OnPartClickListener {
+        void onPartClick(View PartView, int position);
+    }
+    public void setOnPartClickListener(OnPartClickListener listener){
+        this.listener = listener;
     }
 
     @Override

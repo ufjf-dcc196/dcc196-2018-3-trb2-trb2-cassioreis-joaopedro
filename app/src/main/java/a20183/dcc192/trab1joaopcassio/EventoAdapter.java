@@ -15,6 +15,7 @@ import a20183.dcc192.trab1joaopcassio.Model.Evento;
 public class EventoAdapter  extends RecyclerView.Adapter<EventoAdapter.ViewHolder> {
 
     private List<Evento> Eventos;
+    private OnEventClickListener listener;
 
     public EventoAdapter(List<Evento> Eventos)
     {
@@ -30,6 +31,13 @@ public class EventoAdapter  extends RecyclerView.Adapter<EventoAdapter.ViewHolde
         View EventoView =inflater.inflate(R.layout.rcl_layout_evento, viewGroup, false);
         EventoAdapter.ViewHolder viewHolder = new EventoAdapter.ViewHolder(EventoView);
         return viewHolder;
+    }
+
+    public interface OnEventClickListener {
+        void onEventClick(View PartView, int position);
+    }
+    public void setOnEventClickListener(OnEventClickListener listener){
+        this.listener = listener;
     }
 
     @Override

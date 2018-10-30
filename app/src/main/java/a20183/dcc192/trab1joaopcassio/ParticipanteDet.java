@@ -17,6 +17,7 @@ public class ParticipanteDet extends AppCompatActivity {
     private RecyclerView rclDetEventos;
     private EventoAdapter evAdapter;
     private List<Evento> eventosParticipando = new ArrayList<Evento>();
+    private String nome;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,5 +32,11 @@ public class ParticipanteDet extends AppCompatActivity {
         rclDetEventos.setLayoutManager(new LinearLayoutManager(this));
         evAdapter = new EventoAdapter(eventosParticipando);
         rclDetEventos.setAdapter(evAdapter);
+
+        Bundle bundleExtras = getIntent().getExtras();
+        if(bundleExtras!=null)
+        {
+            nome = bundleExtras.getString("nome");
+        }
     }
 }
