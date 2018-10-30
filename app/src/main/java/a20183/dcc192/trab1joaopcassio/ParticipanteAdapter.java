@@ -16,10 +16,25 @@ class ParticipanteAdapter extends RecyclerView.Adapter<ParticipanteAdapter.ViewH
 
     private List<Participante> participantes;
     private OnPartClickListener listener;
+    private OnPartLongClickListener longListener;
 
     public ParticipanteAdapter(List<Participante> participantes)
     {
         this.participantes = participantes;
+    }
+
+    public interface OnPartClickListener {
+        void onPartClick(View PartView, int position);
+    }
+    public void setOnPartClickListener(OnPartClickListener listener){
+        this.listener = listener;
+    }
+
+    public interface OnPartLongClickListener {
+        void onPartLongClick(View PartView, int position);
+    }
+    public void setOnPartLongClickListener(OnPartLongClickListener listener){
+        this.longListener = listener;
     }
 
     @NonNull
@@ -33,12 +48,7 @@ class ParticipanteAdapter extends RecyclerView.Adapter<ParticipanteAdapter.ViewH
         return viewHolder;
     }
 
-    public interface OnPartClickListener {
-        void onPartClick(View PartView, int position);
-    }
-    public void setOnPartClickListener(OnPartClickListener listener){
-        this.listener = listener;
-    }
+
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int position) {
@@ -59,4 +69,59 @@ class ParticipanteAdapter extends RecyclerView.Adapter<ParticipanteAdapter.ViewH
         }
     }
 
+    class viewHolder extends RecyclerView.ViewHolder implements View.OnLongClickListener, View.OnClickListener {
+
+        public TextView txtNomeTitulo;
+
+        public viewHolder(final View itemView) {
+            super(itemView);
+            txtNomeTitulo = (TextView) itemView.findViewById(R.id.txt_nomeTitulo);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(listener!=null){
+                        int position = getAdapterPosition();
+                        if(position!=RecyclerView.NO_POSITION){
+                            listener.onPartClick(itemView, position);
+                        }
+                    }
+                }
+            });
+            itemView.setOnLongClickListener(new View.OnLongClickListener(){
+                @Override
+                public boolean onLongClick(View v) {
+                    if(longListener!=null){
+                        int position = getAdapterPosition();
+                        if(position!=RecyclerView.NO_POSITION){
+                            longListener.onPartLongClick(itemView, position);
+                            return true;
+                        }
+                    }
+                    return false;
+                }
+            });
+        }
+
+        @Override
+        public void onClick(View v) {
+            if(listener!=null){
+                int position = getAdapterPosition();
+                if(position != RecyclerView.NO_POSITION){
+                    listener.onPartClick(v, position);
+                }
+            }
+        }
+        @Override
+        public boolean onLongClick(View v) {
+            if(longListener!=null){
+                int position = getAdapterPosition();
+                if(position != RecyclerView.NO_POSITION){
+                    longListener.onPartLongClick(v, position);
+                    return true;
+                }
+            }
+            return false;
+        }
+    }
 }

@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -60,21 +61,22 @@ public class MainActivity extends AppCompatActivity {
                 startActivityForResult(intent, MainActivity.CADS_EVENTO);
             }
         });
-
         PAdapter.setOnPartClickListener(new ParticipanteAdapter.OnPartClickListener() {
             @Override
             public void onPartClick(View PartView, int position) {
+
                 TextView txtPartNome = (TextView) PartView.findViewById(R.id.txt_nomeTitulo);
                 Intent intent = new Intent(MainActivity.this, ParticipanteDet.class);
                 intent.putExtra(String.valueOf(MainActivity.PARTICIPANTE_NOME), txtPartNome.getText().toString());
                 startActivityForResult(intent, MainActivity.DET_PARTICIPANTE);
             }
         } );
-        
+
         evAdapter.setOnEventClickListener(new EventoAdapter.OnEventClickListener() {
             @Override
-            public void onEventClick(View PartView, int position) {
-                TextView txtEvTitulo = (TextView) PartView.findViewById(R.id.txt_nomeTitulo);
+            public void onEventClick(View EvView, int position) {
+                Toast.makeText(MainActivity.this, "clicou", Toast.LENGTH_SHORT).show();
+                TextView txtEvTitulo = (TextView) EvView.findViewById(R.id.txt_nomeTitulo);
                 Intent intent = new Intent(MainActivity.this, EventoDet.class);
                 intent.putExtra(String.valueOf(MainActivity.EVENTO_TITULO), txtEvTitulo.getText().toString());
                 startActivityForResult(intent, MainActivity.DET_PARTICIPANTE);
