@@ -1,11 +1,37 @@
 package a20183.dcc192.trab1joaopcassio.Model;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class Evento {
-     String título,  facilitador , descrição;
-     String data;
-    String hora;
+    private String título,  facilitador , descrição;
+    private String data;
+    private String hora;
+    private List<Participante> participantes;
+
+    public Evento(String título, String facilitador, String descrição, String data, String hora) {
+        this.título = título;
+        this.facilitador = facilitador;
+        this.descrição = descrição;
+        this.data = data;
+        this.hora = hora;
+        participantes = new ArrayList<Participante>();
+    }
+
+    public void addParticipante(Participante novoParticipante){ this.participantes.add(novoParticipante);}
+    public void removeParticipante(Participante novoParticipante){this.participantes.remove(novoParticipante);}
+    public boolean findParticipante(Participante procuraParticipante)
+    {
+        if(participantes.contains(procuraParticipante))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
 
     public String getTítulo() {
         return título;
@@ -47,11 +73,5 @@ public class Evento {
         this.descrição = descrição;
     }
 
-    public Evento(String título, String facilitador, String descrição, String data, String hora) {
-        this.título = título;
-        this.facilitador = facilitador;
-        this.descrição = descrição;
-        this.data = data;
-        this.hora = hora;
-    }
+
 }

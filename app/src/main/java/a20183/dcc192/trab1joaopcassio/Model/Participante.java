@@ -1,8 +1,11 @@
 package a20183.dcc192.trab1joaopcassio.Model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Participante {
 
-    String nome,email,CPF;
+    private String nome,email,CPF;
 
     public Participante(String nome, String email, String CPF) {
         this.nome = nome;
@@ -11,7 +14,6 @@ public class Participante {
     }
 
     public Participante(){
-
     }
     public String getNome() {
         return nome;

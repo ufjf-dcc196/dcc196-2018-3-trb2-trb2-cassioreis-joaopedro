@@ -37,13 +37,10 @@ public class MainActivity extends AppCompatActivity {
         rclParticipantes.setAdapter((new ParticipanteAdapter(ListaParticipantes.getInstance())));
         PAdapter = new ParticipanteAdapter(ListaParticipantes.getInstance());
 
-
-
         rclEventos = (RecyclerView) findViewById(R.id.rlc_eventoMain);
         rclEventos.setLayoutManager(new LinearLayoutManager(this));
         rclEventos.setAdapter((new EventoAdapter(ListaEventos.getInstance())));
         evAdapter = new EventoAdapter(ListaEventos.getInstance());
-
 
         btnCadsParticipante.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -63,6 +60,5 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        rclEventos.setAdapter(evAdapter);
     }
 }
