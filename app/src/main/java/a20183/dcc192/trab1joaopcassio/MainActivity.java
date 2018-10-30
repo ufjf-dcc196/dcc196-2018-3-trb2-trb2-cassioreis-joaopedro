@@ -63,6 +63,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        rclEventos.setAdapter(PAdapter);
+        rclEventos.setAdapter(evAdapter);
     }
 }
