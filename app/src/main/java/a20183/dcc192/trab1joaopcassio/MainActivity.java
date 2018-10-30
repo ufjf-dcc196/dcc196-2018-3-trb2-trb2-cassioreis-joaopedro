@@ -17,12 +17,10 @@ import a20183.dcc192.trab1joaopcassio.Model.Participante;
 
 public class MainActivity extends AppCompatActivity {
 
-    private static final int CADS_EVENTO = 0, DET_EVENTO = 1, INSC_EVENTO = 2, CADS_PARTICIPANTE = 3, DET_PARTICIPANTE = 4;
+    private static final int  CADS_PARTICIPANTE = 1;
     private Button btnCadsParticipante, btnCadsEvento;
     private RecyclerView rclParticipantes, rclEventos;
-    private List<Participante> participantes = new ArrayList<Participante>();
-    private participanteAdapter PAdapter;
-    private ListaParticipantes participantesDAO;
+    private ParticipanteAdapter PAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,12 +32,12 @@ public class MainActivity extends AppCompatActivity {
 
         rclParticipantes = (RecyclerView) findViewById(R.id.rlc_participantesMain);
         rclParticipantes.setLayoutManager(new LinearLayoutManager(this));
-        PAdapter = new participanteAdapter(participantes);
-        rclParticipantes.setAdapter(PAdapter);
+        rclParticipantes.setAdapter((new ParticipanteAdapter(ListaParticipantes.getInstance())));
+        PAdapter = new ParticipanteAdapter(ListaParticipantes.getInstance());
 
-        rclEventos = (RecyclerView) findViewById(R.id.rlc_eventoMain);
-        rclEventos.setLayoutManager(new LinearLayoutManager(this));
-        participantes.add(new Participante());
+
+        //rclEventos = (RecyclerView) findViewById(R.id.rlc_eventoMain);
+        //rclEventos.setLayoutManager(new LinearLayoutManager(this));
 
 
         btnCadsParticipante.setOnClickListener(new View.OnClickListener() {
@@ -49,11 +47,14 @@ public class MainActivity extends AppCompatActivity {
                 startActivityForResult(intent, MainActivity.CADS_PARTICIPANTE);
             }
         });
+
+        rclParticipantes.setAdapter(PAdapter);
+
         btnCadsEvento.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, EventoCads.class);
-                startActivityForResult(intent, MainActivity.CADS_EVENTO);
+             //   startActivityForResult(intent, MainActivity.CADS_EVENTO);
             }
         });
     }

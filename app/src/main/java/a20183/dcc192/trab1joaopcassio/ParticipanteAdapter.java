@@ -12,11 +12,11 @@ import java.util.List;
 
 import a20183.dcc192.trab1joaopcassio.Model.Participante;
 
-class participanteAdapter extends RecyclerView.Adapter<participanteAdapter.ViewHolder> {
+class ParticipanteAdapter extends RecyclerView.Adapter<ParticipanteAdapter.ViewHolder> {
 
     private List<Participante> participantes;
 
-    public participanteAdapter(List<Participante> participantes)
+    public ParticipanteAdapter(List<Participante> participantes)
     {
         this.participantes = participantes;
     }
@@ -34,8 +34,8 @@ class participanteAdapter extends RecyclerView.Adapter<participanteAdapter.ViewH
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int position) {
-        Participante participante = participantes.get(position);
-        viewHolder.nome.setText(participante.getNome());
+        viewHolder.nome.setText(participantes.get(position).getNome());
+
     }
 
     @Override
@@ -47,7 +47,7 @@ class participanteAdapter extends RecyclerView.Adapter<participanteAdapter.ViewH
         public TextView nome;
         public ViewHolder(final View itemView) {
             super(itemView);
-            nome = itemView.findViewById(R.id.txt_nomeTitulo);
+            nome = (TextView)itemView.findViewById(R.id.txt_nomeTitulo);
         }
     }
 

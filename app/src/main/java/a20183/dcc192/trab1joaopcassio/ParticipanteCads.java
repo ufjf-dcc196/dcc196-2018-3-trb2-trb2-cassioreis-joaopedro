@@ -29,15 +29,11 @@ public class ParticipanteCads extends AppCompatActivity {
         btnCadastrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                Intent resultado = new Intent();
                 Participante participante = new Participante(txtNome.getText().toString(),txtCpf.getText().toString(),txtEmail.getText().toString());
                 ListaParticipantes.getInstance().add(participante);
-
-                setResult(Activity.RESULT_OK, resultado);
+                setResult(Activity.RESULT_OK);
                 finish();
-
-            }
+          }
         });
     }
 }
