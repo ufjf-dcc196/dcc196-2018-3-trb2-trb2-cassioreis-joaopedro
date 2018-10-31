@@ -9,6 +9,7 @@ import android.widget.EditText;
 import java.util.ArrayList;
 import java.util.List;
 
+import a20183.dcc192.trab1joaopcassio.Listas.ListaEventos;
 import a20183.dcc192.trab1joaopcassio.Listas.ListaParticipantes;
 import a20183.dcc192.trab1joaopcassio.Model.Evento;
 import a20183.dcc192.trab1joaopcassio.Model.Participante;
@@ -45,9 +46,17 @@ public class ParticipanteDet extends AppCompatActivity {
                 }
 
             }
-            txtDetNome.setText(nome);
+            txtDetNome.setText(ListaParticipantes.getInstance().get(i).getNome());
             txtDetEmail.setText(ListaParticipantes.getInstance().get(i).getEmail()) ;
             txtDetCpf.setText(ListaParticipantes.getInstance().get(i).getCPF()) ;
+
+            for(int j = 0; j <= ListaEventos.getInstance().size(); j++){
+                if(ListaEventos.getInstance().get(j).findParticipante(ListaParticipantes.getInstance().get(i))){
+                    eventosParticipando.add(ListaEventos.getInstance().get(j));
+                }
+
+            }
+            evAdapter.notifyDataSetChanged();
         }
     }
 }

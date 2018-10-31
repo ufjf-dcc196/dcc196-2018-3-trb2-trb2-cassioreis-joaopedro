@@ -2,6 +2,7 @@ package a20183.dcc192.trab1joaopcassio;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.TextView;
 
@@ -14,7 +15,7 @@ import a20183.dcc192.trab1joaopcassio.Model.Participante;
 public class EventoDet extends AppCompatActivity {
     private TextView txtDetTitulo, txtDetData, txtDetHora, txtDetFacilitador, txtDetDesc;
     private RecyclerView rclDetParticipantes;
-    private Participante PAdapter;
+    private ParticipanteAdapter PAdapter;
     private List<Participante> participantes = new ArrayList<Participante>();
     private String titulo;
 
@@ -28,6 +29,11 @@ public class EventoDet extends AppCompatActivity {
         txtDetHora = (TextView) findViewById(R.id.txt_detHora);
         txtDetFacilitador = (TextView) findViewById(R.id.txt_detFacilitador);
         txtDetDesc = (TextView) findViewById(R.id.txt_detDesc);
+/*
+        rclDetParticipantes = (RecyclerView) findViewById(R.id.rcl_detEventos);
+        rclDetParticipantes.setLayoutManager(new LinearLayoutManager(this));
+        PAdapter = new ParticipanteAdapter(participantes);
+        rclDetParticipantes.setAdapter(PAdapter);*/
 
         Bundle bundleExtras = getIntent().getExtras();
         if(bundleExtras!=null)

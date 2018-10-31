@@ -67,7 +67,7 @@ class ParticipanteAdapter extends RecyclerView.Adapter<ParticipanteAdapter.ViewH
 
         public ViewHolder(final View itemView) {
             super(itemView);
-            txtNome = (TextView) itemView.findViewById(R.id.txt_nomeTitulos);
+            txtNome = (TextView) itemView.findViewById(R.id.txt_nomeTitulo);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
