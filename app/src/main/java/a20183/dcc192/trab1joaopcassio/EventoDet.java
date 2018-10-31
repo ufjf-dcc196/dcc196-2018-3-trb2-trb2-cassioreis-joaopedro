@@ -10,30 +10,25 @@ import java.util.ArrayList;
 import java.util.List;
 
 import a20183.dcc192.trab1joaopcassio.Listas.ListaEventos;
+import a20183.dcc192.trab1joaopcassio.Model.Evento;
 import a20183.dcc192.trab1joaopcassio.Model.Participante;
 
 public class EventoDet extends AppCompatActivity {
     private TextView txtDetTitulo, txtDetData, txtDetHora, txtDetFacilitador, txtDetDesc;
     private RecyclerView rclDetParticipantes;
-    private ParticipanteAdapter PAdapter;
-    private List<Participante> participantes = new ArrayList<Participante>();
+    private ParticipanteAdapter PDetAdapter;
+    private Evento eventoAtual;
     private String titulo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.det_evento);
-
         txtDetTitulo = (TextView) findViewById(R.id.txt_detTitulo);
         txtDetData = (TextView) findViewById(R.id.txt_detData);
         txtDetHora = (TextView) findViewById(R.id.txt_detHora);
         txtDetFacilitador = (TextView) findViewById(R.id.txt_detFacilitador);
         txtDetDesc = (TextView) findViewById(R.id.txt_detDesc);
-/*
-        rclDetParticipantes = (RecyclerView) findViewById(R.id.rcl_detEventos);
-        rclDetParticipantes.setLayoutManager(new LinearLayoutManager(this));
-        PAdapter = new ParticipanteAdapter(participantes);
-        rclDetParticipantes.setAdapter(PAdapter);*/
 
         Bundle bundleExtras = getIntent().getExtras();
         if(bundleExtras!=null)
@@ -42,15 +37,21 @@ public class EventoDet extends AppCompatActivity {
             int i;
             for(i=0 ; i <= ListaEventos.getInstance().size(); i++){
                 if(titulo.equals(ListaEventos.getInstance().get(i).getTítulo())){
+                    eventoAtual = ListaEventos.getInstance().get(i);
                     break;
                 }
 
             }
             txtDetTitulo.setText(titulo);
-            txtDetData.setText(ListaEventos.getInstance().get(i).getData()) ;
-            txtDetHora.setText(ListaEventos.getInstance().get(i).getHora()) ;
-            txtDetFacilitador.setText(ListaEventos.getInstance().get(i).getFacilitador());
-            txtDetDesc.setText(ListaEventos.getInstance().get(i).getDescricao());
+            txtDetData.setText(eventoAtual.getData()) ;
+            txtDetHora.setText(eventoAtual.getHora()) ;
+            txtDetFacilitador.setText(eventoAtual.getFacilitador());
+            txtDetDesc.setText(eventoAtual.getDescricao());
         }
+
+        rclDetParticipantes = (RecyclerView) findViewById(R.id.rcl_detParticipantes);
+        rclDetParticipantes.setLayoutManager(new LinearLayoutManager(this));
+        PDetAdapter = new ParticipanteAdapter(eventoAtual.getParticipantes());
+        rclDetParticipantes.setAdapter(PDetAdapter);
     }
 }

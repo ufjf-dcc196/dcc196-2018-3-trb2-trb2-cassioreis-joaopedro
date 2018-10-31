@@ -33,6 +33,10 @@ public class Evento {
         }
     }
 
+    public List<Participante> getParticipantes() {
+        return participantes;
+    }
+
     public String getTítulo() {
         return título;
     }
