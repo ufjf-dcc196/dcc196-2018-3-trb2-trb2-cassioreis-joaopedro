@@ -16,6 +16,7 @@ public class EventoAdapter  extends RecyclerView.Adapter<EventoAdapter.ViewHolde
 
     private List<Evento> Eventos;
     private OnEventClickListener listener;
+    private OnEventLongClickListener longListener;
 
     public EventoAdapter(List<Evento> Eventos)
     {
@@ -24,24 +25,27 @@ public class EventoAdapter  extends RecyclerView.Adapter<EventoAdapter.ViewHolde
 
     @NonNull
     @Override
-    public EventoAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         Context context = viewGroup.getContext();
         LayoutInflater inflater = LayoutInflater.from(context);
 
         View EventoView =inflater.inflate(R.layout.rcl_layout_evento, viewGroup, false);
-        EventoAdapter.ViewHolder viewHolder = new EventoAdapter.ViewHolder(EventoView);
+        ViewHolder viewHolder = new ViewHolder(EventoView);
         return viewHolder;
     }
 
     public interface OnEventClickListener {
-        void onEventClick(View PartView, int position);
+        void onEventClick(View EventView, int position);
     }
     public void setOnEventClickListener(OnEventClickListener listener){
         this.listener = listener;
     }
+    public interface OnEventLongClickListener {
+        void onEventLongClick(View EventView, int position);
+    }
 
     @Override
-    public void onBindViewHolder(@NonNull EventoAdapter.ViewHolder viewHolder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolder viewHolder, int position) {
         viewHolder.nome.setText(Eventos.get(position).getTítulo());
 
     }
@@ -56,8 +60,52 @@ public class EventoAdapter  extends RecyclerView.Adapter<EventoAdapter.ViewHolde
         public ViewHolder(final View itemView) {
             super(itemView);
             nome = (TextView)itemView.findViewById(R.id.txt_nomeTitulos);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(listener!=null){
+                        int position = getAdapterPosition();
+                        if(position!=RecyclerView.NO_POSITION){
+                            listener.onEventClick(itemView, position);
+                        }
+                    }
+                }
+            });
+            itemView.setOnLongClickListener(new View.OnLongClickListener(){
+                @Override
+                public boolean onLongClick(View v) {
+                    if(longListener!=null){
+                        int position = getAdapterPosition();
+                        if(position!=RecyclerView.NO_POSITION){
+                            longListener.onEventLongClick(itemView, position);
+                            return true;
+                        }
+                    }
+                    return false;
+                }
+            });
+        }
+
+        public void onClick(View v) {
+            if(listener!=null){
+                int position = getAdapterPosition();
+                if(position != RecyclerView.NO_POSITION){
+                    listener.onEventClick(v, position);
+                }
+            }
+        }
+
+        public boolean onLongClick(View v) {
+            if(longListener!=null){
+                int position = getAdapterPosition();
+                if(position != RecyclerView.NO_POSITION){
+                    longListener.onEventLongClick(v, position);
+                    return true;
+                }
+            }
+            return false;
         }
     }
-
 }
+
 
