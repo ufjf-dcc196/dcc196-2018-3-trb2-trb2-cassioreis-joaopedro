@@ -19,7 +19,6 @@ public class ParticipanteDet extends AppCompatActivity {
     private EventoAdapter evAdapter;
     private List<Evento> eventosParticipando = new ArrayList<Evento>();
     private String nome;
-    private int i=0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +38,7 @@ public class ParticipanteDet extends AppCompatActivity {
         if(bundleExtras!=null)
         {
             nome = bundleExtras.getString("nome");
-
+            int i;
             for(i=0 ; i <= ListaParticipantes.getInstance().size();i++){
                 if(nome.equals(ListaParticipantes.getInstance().get(i).getNome())){
                     break;

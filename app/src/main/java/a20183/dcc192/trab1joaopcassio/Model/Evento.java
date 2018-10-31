@@ -10,10 +10,10 @@ public class Evento {
     private String hora;
     private List<Participante> participantes;
 
-    public Evento(String título, String facilitador, String descrição, String data, String hora) {
+    public Evento(String título, String facilitador, String descricao, String data, String hora) {
         this.título = título;
         this.facilitador = facilitador;
-        this.descrição = descrição;
+        this.descrição = descricao;
         this.data = data;
         this.hora = hora;
         participantes = new ArrayList<Participante>();
@@ -65,7 +65,7 @@ public class Evento {
         this.facilitador = facilitador;
     }
 
-    public String getDescrição() {
+    public String getDescricao() {
         return descrição;
     }
 
