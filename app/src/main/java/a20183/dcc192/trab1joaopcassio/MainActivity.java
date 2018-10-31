@@ -21,7 +21,7 @@ import a20183.dcc192.trab1joaopcassio.Model.Participante;
 
 public class MainActivity extends AppCompatActivity {
 
-    private static final int  CADS_PARTICIPANTE = 1,CADS_EVENTO=2, DET_PARTICIPANTE = 3, DET_EVENTO = 4;
+    public static final int  CADS_PARTICIPANTE = 1,CADS_EVENTO=2, DET_PARTICIPANTE = 3, DET_EVENTO = 4, INSC_EVENTO = 5;
     private static final String PARTICIPANTE_NOME = "nome", EVENTO_TITULO = "titulo";
     private Button btnCadsParticipante, btnCadsEvento;
     private RecyclerView rclParticipantes, rclEventos;
