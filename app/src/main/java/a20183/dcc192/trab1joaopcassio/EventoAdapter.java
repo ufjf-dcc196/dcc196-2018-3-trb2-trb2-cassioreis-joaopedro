@@ -59,6 +59,9 @@ public class EventoAdapter  extends RecyclerView.Adapter<EventoAdapter.ViewHolde
         public TextView nome;
         public ViewHolder(final View itemView) {
             super(itemView);
+
+            /***joao verifica se eu fiz alguma coisa de errado ak pq ta dando crash e ele sai*/
+
             nome = (TextView)itemView.findViewById(R.id.txt_nomeTitulos);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
