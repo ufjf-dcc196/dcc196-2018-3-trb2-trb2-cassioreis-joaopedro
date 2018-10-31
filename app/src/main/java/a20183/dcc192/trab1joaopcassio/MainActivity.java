@@ -21,7 +21,7 @@ import a20183.dcc192.trab1joaopcassio.Model.Participante;
 
 public class MainActivity extends AppCompatActivity {
 
-    private static final int  CADS_PARTICIPANTE = 1,CADS_EVENTO=2, DET_PARTICIPANTE = 3;
+    private static final int  CADS_PARTICIPANTE = 1,CADS_EVENTO=2, DET_PARTICIPANTE = 3, DET_EVENTO = 4;
     private static final String PARTICIPANTE_NOME = "nome", EVENTO_TITULO = "titulo";
     private Button btnCadsParticipante, btnCadsEvento;
     private RecyclerView rclParticipantes, rclEventos;
@@ -75,11 +75,12 @@ public class MainActivity extends AppCompatActivity {
         evAdapter.setOnEventClickListener(new EventoAdapter.OnEventClickListener() {
             @Override
             public void onEventClick(View EvView, int position) {
-                Toast.makeText(MainActivity.this, "clicou", Toast.LENGTH_SHORT).show();
-                TextView txtEvTitulo = (TextView) EvView.findViewById(R.id.txt_nomeTitulo);
+
+                TextView txtEvTitulo = (TextView) EvView.findViewById(R.id.txt_nomeTitulos);
                 Intent intent = new Intent(MainActivity.this, EventoDet.class);
                 intent.putExtra(String.valueOf(MainActivity.EVENTO_TITULO), txtEvTitulo.getText().toString());
-                startActivityForResult(intent, MainActivity.DET_PARTICIPANTE);
+                startActivityForResult(intent, MainActivity.DET_EVENTO);
+
             }
         } );
 

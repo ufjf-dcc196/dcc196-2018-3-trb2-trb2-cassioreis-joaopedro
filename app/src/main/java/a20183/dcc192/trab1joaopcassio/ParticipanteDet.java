@@ -18,7 +18,7 @@ public class ParticipanteDet extends AppCompatActivity {
     private RecyclerView rclDetEventos;
     private EventoAdapter evAdapter;
     private List<Evento> eventosParticipando = new ArrayList<Evento>();
-    private String nome,email,cpf;
+    private String nome;
     private int i=0;
 
     @Override
@@ -40,19 +40,15 @@ public class ParticipanteDet extends AppCompatActivity {
         {
             nome = bundleExtras.getString("nome");
 
-
-            /*VERIFICAR COMO IREMOS FAZER PARA CRIAR ESSE OBJETO, JA QUE TEMOS SOMENTE O NOEM, MINHA IDEIA ERA
-            * PERCORRER A LISTA E SE EU ACHASSE UM NOME IGUAL EU PARAVA, DEPOIS DISSO EU CRIAVA O PARTICIPANTE
-            */
             for(i=0 ; i <= ListaParticipantes.getInstance().size();i++){
                 if(nome.equals(ListaParticipantes.getInstance().get(i).getNome())){
                     break;
                 }
 
             }
-            txtDetNome.setText(ListaParticipantes.getInstance().get(i).getNome()) ;
-            //   txtDetEmail.setText(ListaParticipantes.getInstance().get(i).getEmail()) ;
-            //  txtDetCpf.setText(ListaParticipantes.getInstance().get(i).getCPF()) ;
+            txtDetNome.setText(nome);
+            txtDetEmail.setText(ListaParticipantes.getInstance().get(i).getEmail()) ;
+            txtDetCpf.setText(ListaParticipantes.getInstance().get(i).getCPF()) ;
         }
     }
 }

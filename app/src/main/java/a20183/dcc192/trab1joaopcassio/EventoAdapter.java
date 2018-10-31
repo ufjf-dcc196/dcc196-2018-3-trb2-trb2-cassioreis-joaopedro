@@ -15,12 +15,25 @@ import a20183.dcc192.trab1joaopcassio.Model.Evento;
 public class EventoAdapter  extends RecyclerView.Adapter<EventoAdapter.ViewHolder> {
 
     private List<Evento> Eventos;
-    private OnEventClickListener listener;
-    private OnEventLongClickListener longListener;
+    private OnEventClickListener evListener;
+    private OnEventLongClickListener evLongListener;
 
     public EventoAdapter(List<Evento> Eventos)
     {
         this.Eventos = Eventos;
+    }
+
+    public interface OnEventClickListener {
+        void onEventClick(View EventView, int position);
+    }
+    public void setOnEventClickListener(OnEventClickListener listener){
+        this.evListener = listener;
+    }
+    public interface OnEventLongClickListener {
+        void onEventLongClick(View EventView, int position);
+    }
+    public void setOnEventLongClickListener(OnEventLongClickListener listener){
+        this.evLongListener = listener;
     }
 
     @NonNull
@@ -34,19 +47,10 @@ public class EventoAdapter  extends RecyclerView.Adapter<EventoAdapter.ViewHolde
         return viewHolder;
     }
 
-    public interface OnEventClickListener {
-        void onEventClick(View EventView, int position);
-    }
-    public void setOnEventClickListener(OnEventClickListener listener){
-        this.listener = listener;
-    }
-    public interface OnEventLongClickListener {
-        void onEventLongClick(View EventView, int position);
-    }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int position) {
-        viewHolder.nome.setText(Eventos.get(position).getTítulo());
+        viewHolder.titulo.setText(Eventos.get(position).getTítulo());
 
     }
 
@@ -56,20 +60,18 @@ public class EventoAdapter  extends RecyclerView.Adapter<EventoAdapter.ViewHolde
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        public TextView nome;
+        public TextView titulo;
         public ViewHolder(final View itemView) {
             super(itemView);
 
-            /***joao verifica se eu fiz alguma coisa de errado ak pq ta dando crash e ele sai*/
-
-            nome = (TextView)itemView.findViewById(R.id.txt_nomeTitulos);
+            titulo = (TextView)itemView.findViewById(R.id.txt_nomeTitulos);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if(listener!=null){
+                    if(evListener !=null){
                         int position = getAdapterPosition();
                         if(position!=RecyclerView.NO_POSITION){
-                            listener.onEventClick(itemView, position);
+                            evListener.onEventClick(itemView, position);
                         }
                     }
                 }
@@ -77,10 +79,10 @@ public class EventoAdapter  extends RecyclerView.Adapter<EventoAdapter.ViewHolde
             itemView.setOnLongClickListener(new View.OnLongClickListener(){
                 @Override
                 public boolean onLongClick(View v) {
-                    if(longListener!=null){
+                    if(evLongListener !=null){
                         int position = getAdapterPosition();
                         if(position!=RecyclerView.NO_POSITION){
-                            longListener.onEventLongClick(itemView, position);
+                            evLongListener.onEventLongClick(itemView, position);
                             return true;
                         }
                     }
@@ -90,19 +92,19 @@ public class EventoAdapter  extends RecyclerView.Adapter<EventoAdapter.ViewHolde
         }
 
         public void onClick(View v) {
-            if(listener!=null){
+            if(evListener !=null){
                 int position = getAdapterPosition();
                 if(position != RecyclerView.NO_POSITION){
-                    listener.onEventClick(v, position);
+                    evListener.onEventClick(v, position);
                 }
             }
         }
 
         public boolean onLongClick(View v) {
-            if(longListener!=null){
+            if(evLongListener !=null){
                 int position = getAdapterPosition();
                 if(position != RecyclerView.NO_POSITION){
-                    longListener.onEventLongClick(v, position);
+                    evLongListener.onEventLongClick(v, position);
                     return true;
                 }
             }

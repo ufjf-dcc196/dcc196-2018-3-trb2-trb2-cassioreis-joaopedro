@@ -15,8 +15,8 @@ import a20183.dcc192.trab1joaopcassio.Model.Participante;
 class ParticipanteAdapter extends RecyclerView.Adapter<ParticipanteAdapter.ViewHolder> {
 
     private List<Participante> participantes;
-    private OnPartClickListener listener;
-    private OnPartLongClickListener longListener;
+    private OnPartClickListener partListener;
+    private OnPartLongClickListener partLongListener;
 
     public ParticipanteAdapter(List<Participante> participantes)
     {
@@ -27,14 +27,14 @@ class ParticipanteAdapter extends RecyclerView.Adapter<ParticipanteAdapter.ViewH
         void onPartClick(View PartView, int position);
     }
     public void setOnPartClickListener(OnPartClickListener listener){
-        this.listener = listener;
+        this.partListener = listener;
     }
 
     public interface OnPartLongClickListener {
         void onPartLongClick(View PartView, int position);
     }
     public void setOnPartLongClickListener(OnPartLongClickListener listener){
-        this.longListener = listener;
+        this.partLongListener = listener;
     }
 
     @NonNull
@@ -67,15 +67,15 @@ class ParticipanteAdapter extends RecyclerView.Adapter<ParticipanteAdapter.ViewH
 
         public ViewHolder(final View itemView) {
             super(itemView);
-            txtNome = (TextView) itemView.findViewById(R.id.txt_nomeTitulo);
+            txtNome = (TextView) itemView.findViewById(R.id.txt_nomeTitulos);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if(listener!=null){
+                    if(partListener !=null){
                         int position = getAdapterPosition();
                         if(position!=RecyclerView.NO_POSITION){
-                            listener.onPartClick(itemView, position);
+                            partListener.onPartClick(itemView, position);
                         }
                     }
                 }
@@ -83,10 +83,10 @@ class ParticipanteAdapter extends RecyclerView.Adapter<ParticipanteAdapter.ViewH
             itemView.setOnLongClickListener(new View.OnLongClickListener(){
                 @Override
                 public boolean onLongClick(View v) {
-                    if(longListener!=null){
+                    if(partLongListener !=null){
                         int position = getAdapterPosition();
                         if(position!=RecyclerView.NO_POSITION){
-                            longListener.onPartLongClick(itemView, position);
+                            partLongListener.onPartLongClick(itemView, position);
                             return true;
                         }
                     }
@@ -97,19 +97,19 @@ class ParticipanteAdapter extends RecyclerView.Adapter<ParticipanteAdapter.ViewH
 
         @Override
         public void onClick(View v) {
-            if(listener!=null){
+            if(partListener !=null){
                 int position = getAdapterPosition();
                 if(position != RecyclerView.NO_POSITION){
-                    listener.onPartClick(v, position);
+                    partListener.onPartClick(v, position);
                 }
             }
         }
         @Override
         public boolean onLongClick(View v) {
-            if(longListener!=null){
+            if(partLongListener !=null){
                 int position = getAdapterPosition();
                 if(position != RecyclerView.NO_POSITION){
-                    longListener.onPartLongClick(v, position);
+                    partLongListener.onPartLongClick(v, position);
                     return true;
                 }
             }
