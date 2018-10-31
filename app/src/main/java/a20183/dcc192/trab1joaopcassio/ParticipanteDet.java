@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -62,14 +63,31 @@ public class ParticipanteDet extends AppCompatActivity {
 
 
             for(int j = 0; j < ListaEventos.getInstance().size(); j++){
-                if(ListaEventos.getInstance().get(j).findParticipante(participanteAtual) && !ListaEventos.getInstance().contains(ListaEventos.getInstance().get(j))){
+                if(ListaEventos.getInstance().get(j).findParticipante(participanteAtual)){
                     eventosParticipando.add(ListaEventos.getInstance().get(j));
                 }
 
             }
             evDetAdapter.notifyDataSetChanged();
         }
+        evDetAdapter.setOnEventLongClickListener(new EventoAdapter.OnEventLongClickListener() {
+            @Override
+            public void onEventLongClick(View EventView, int position) {
 
+                TextView txtTitulo = (TextView) EventView.findViewById(R.id.txt_nomeTitulos);
+                String titulo = txtTitulo.getText().toString();
+                for(int i=0; i<eventosParticipando.size(); i++)
+                {
+                    if(titulo.equals(eventosParticipando.get(i).getTítulo()))
+                    {
+                        eventosParticipando.get(i).getParticipantes().remove(participanteAtual);
+                        eventosParticipando.remove(eventosParticipando.get(i));
+                    }
+                }
+                evDetAdapter.notifyItemRemoved(position);
+
+            }
+        });
         btnDetEvInsc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
