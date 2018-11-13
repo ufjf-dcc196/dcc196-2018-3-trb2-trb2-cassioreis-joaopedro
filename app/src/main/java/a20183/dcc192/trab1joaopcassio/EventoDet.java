@@ -51,7 +51,9 @@ public class EventoDet extends AppCompatActivity {
 
         rclDetParticipantes = (RecyclerView) findViewById(R.id.rcl_detParticipantes);
         rclDetParticipantes.setLayoutManager(new LinearLayoutManager(this));
+
         PDetAdapter = new ParticipanteAdapter(eventoAtual.getParticipantes());
+
         rclDetParticipantes.setAdapter(PDetAdapter);
     }
 }
