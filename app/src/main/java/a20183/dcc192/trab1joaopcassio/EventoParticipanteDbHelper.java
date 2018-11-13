@@ -14,12 +14,14 @@ public class EventoParticipanteDbHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL(BibliotecaContract.Livro.CREATE_LIVRO);
+        db.execSQL(EventoContract.Evento.CREATE_EVENTO);
+        db.execSQL(ParticipanteContract.Participante.CREATE_PARTICIPANTE);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL(BibliotecaContract.Livro.DROP_LIVRO);
+        db.execSQL(ParticipanteContract.Participante.DROP_PARTICIPANTE);
+        db.execSQL(EventoContract.Evento.DROP_EVENTO);
         onCreate(db);
     }
 
