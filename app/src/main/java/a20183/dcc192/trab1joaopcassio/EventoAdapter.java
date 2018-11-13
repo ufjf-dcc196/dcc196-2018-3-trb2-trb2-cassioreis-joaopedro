@@ -1,6 +1,7 @@
 package a20183.dcc192.trab1joaopcassio;
 
 import android.content.Context;
+import android.database.Cursor;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -14,13 +15,12 @@ import a20183.dcc192.trab1joaopcassio.Model.Evento;
 
 public class EventoAdapter  extends RecyclerView.Adapter<EventoAdapter.ViewHolder> {
 
-    private List<Evento> Eventos;
+    private Cursor cursor;
     private OnEventClickListener evListener;
     private OnEventLongClickListener evLongListener;
 
-    public EventoAdapter(List<Evento> Eventos)
-    {
-        this.Eventos = Eventos;
+    public EventoAdapter(Cursor c){
+        cursor = c;
     }
 
     public interface OnEventClickListener {
@@ -50,13 +50,14 @@ public class EventoAdapter  extends RecyclerView.Adapter<EventoAdapter.ViewHolde
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int position) {
-        viewHolder.titulo.setText(Eventos.get(position).getTítulo());
-
+        int idxTitulo = cursor.getColumnIndexOrThrow(EventoContract.Evento.COLUMN_NAME_TITULO);
+        cursor.moveToPosition(position);
+        viewHolder.titulo.setText(cursor.getString(idxTitulo));
     }
 
     @Override
     public int getItemCount() {
-        return Eventos.size();
+        return cursor.getCount();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
