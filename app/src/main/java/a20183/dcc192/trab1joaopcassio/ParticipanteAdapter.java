@@ -1,6 +1,7 @@
 package a20183.dcc192.trab1joaopcassio;
 
 import android.content.Context;
+import android.database.Cursor;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -14,13 +15,12 @@ import a20183.dcc192.trab1joaopcassio.Model.Participante;
 
 class ParticipanteAdapter extends RecyclerView.Adapter<ParticipanteAdapter.ViewHolder> {
 
-    private List<Participante> participantes;
+    private Cursor cursor;
     private OnPartClickListener partListener;
     private OnPartLongClickListener partLongListener;
 
-    public ParticipanteAdapter(List<Participante> participantes)
-    {
-        this.participantes = participantes;
+    public ParticipanteAdapter(Cursor c){
+        cursor = c;
     }
 
     public interface OnPartClickListener {
@@ -52,13 +52,15 @@ class ParticipanteAdapter extends RecyclerView.Adapter<ParticipanteAdapter.ViewH
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int position) {
-        viewHolder.txtNome.setText(participantes.get(position).getNome());
+        int idxNome = cursor.getColumnIndexOrThrow(ParticipanteContract.Participante.COLUMN_NAME_NOME);
+        cursor.moveToPosition(position);
+        viewHolder.txtNome.setText(cursor.getString(idxNome));
 
     }
 
     @Override
     public int getItemCount() {
-        return participantes.size();
+        return cursor.getCount();
     }
 
     class ViewHolder extends RecyclerView.ViewHolder implements View.OnLongClickListener, View.OnClickListener {
