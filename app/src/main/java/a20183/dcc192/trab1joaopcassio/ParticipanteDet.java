@@ -1,7 +1,8 @@
-package a20183.dcc192.trab1joaopcassio;
+    package a20183.dcc192.trab1joaopcassio;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -42,7 +43,9 @@ public class ParticipanteDet extends AppCompatActivity {
 
         rclDetEventos = (RecyclerView) findViewById(R.id.rcl_detEventos);
         rclDetEventos.setLayoutManager(new LinearLayoutManager(this));
-        evDetAdapter = new EventoAdapter(eventosParticipando);
+
+       //Linha com erro, foi inserido o cursor, verificaar
+        evDetAdapter = new EventoAdapter((Cursor) eventosParticipando);
         rclDetEventos.setAdapter(evDetAdapter);
 
         Bundle bundleExtras = getIntent().getExtras();

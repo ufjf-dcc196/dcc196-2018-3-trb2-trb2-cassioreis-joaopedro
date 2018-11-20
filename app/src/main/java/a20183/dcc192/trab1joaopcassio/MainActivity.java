@@ -2,6 +2,8 @@ package a20183.dcc192.trab1joaopcassio;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -21,12 +23,14 @@ import a20183.dcc192.trab1joaopcassio.Model.Participante;
 
 public class MainActivity extends AppCompatActivity {
 
-    public static final int  CADS_PARTICIPANTE = 1,CADS_EVENTO=2, DET_PARTICIPANTE = 3, DET_EVENTO = 4, INSC_EVENTO = 5;
+    public static final int CADS_PARTICIPANTE = 1, CADS_EVENTO = 2, DET_PARTICIPANTE = 3, DET_EVENTO = 4, INSC_EVENTO = 5;
     public static final String PARTICIPANTE_NOME = "nome", EVENTO_TITULO = "titulo";
     private Button btnCadsParticipante, btnCadsEvento;
     private RecyclerView rclParticipantes, rclEventos;
     private ParticipanteAdapter PAdapter;
     private EventoAdapter evAdapter;
+    private EventoParticipanteDbHelper dbHelper;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
 
         rclParticipantes = (RecyclerView) findViewById(R.id.rlc_participantesMain);
         rclParticipantes.setLayoutManager(new LinearLayoutManager(this));
-        PAdapter = new ParticipanteAdapter(ListaParticipantes.getInstance());
+        PAdapter = new ParticipanteAdapter(getParticipantes());
         rclParticipantes.setAdapter(PAdapter);
 
         rclEventos = (RecyclerView) findViewById(R.id.rlc_eventoMain);
@@ -70,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
                 intent.putExtra(String.valueOf(MainActivity.PARTICIPANTE_NOME), txtPartNome.getText().toString());
                 startActivityForResult(intent, MainActivity.DET_PARTICIPANTE);
             }
-        } );
+        });
 
         evAdapter.setOnEventClickListener(new EventoAdapter.OnEventClickListener() {
             @Override
@@ -82,22 +86,35 @@ public class MainActivity extends AppCompatActivity {
                 startActivityForResult(intent, MainActivity.DET_EVENTO);
 
             }
-        } );
+        });
 
     }
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if(requestCode == MainActivity.CADS_PARTICIPANTE && resultCode == Activity.RESULT_OK) {
+        if (requestCode == MainActivity.CADS_PARTICIPANTE && resultCode == Activity.RESULT_OK) {
             PAdapter.notifyDataSetChanged();
         }
-        if(requestCode == MainActivity.CADS_EVENTO && resultCode == Activity.RESULT_OK) {
+        if (requestCode == MainActivity.CADS_EVENTO && resultCode == Activity.RESULT_OK) {
             evAdapter.notifyDataSetChanged();
         }
-        if(requestCode == MainActivity.DET_PARTICIPANTE) {
+        if (requestCode == MainActivity.DET_PARTICIPANTE) {
             PAdapter.notifyDataSetChanged();
         }
 
+    }
+
+
+    private Cursor getParticipantes()
+    {
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+        String []visao = {
+                ParticipanteContract.Participante.COLUMN_NAME_NOME,
+                ParticipanteContract.Participante.COLUMN_NAME_CPF,
+                ParticipanteContract.Participante.COLUMN_NAME_EMAIL
+        };
+        String sort = ParticipanteContract.Participante.COLUMN_NAME_NOME+ " ASC";
+        return db.query(ParticipanteContract.Participante.TABLE_NAME, visao,null,null,null,null, sort);
     }
 }
