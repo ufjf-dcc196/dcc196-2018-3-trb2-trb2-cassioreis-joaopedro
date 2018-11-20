@@ -2,6 +2,8 @@ package a20183.dcc192.trab1joaopcassio;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -53,4 +55,20 @@ public class EventoInsc extends AppCompatActivity {
             }
         });
     }
+
+
+/*
+falta fazer essa funcao
+    private Cursor getInsc()
+    {
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+        String []visao = {
+                EventoContract.Evento.COLUMN_NAME_DESCRICAO,
+                EventoContract.Evento.COLUMN_NAME_HORA,
+                EventoContract.Evento.COLUMN_NAME_TITULO
+        };
+        String sort = EventoContract.Evento.COLUMN_NAME_ID+ " ASC";
+        return db.query(EventoContract.Evento.TABLE_NAME, visao,null,null,null,null, sort);
+    }
+*/
 }

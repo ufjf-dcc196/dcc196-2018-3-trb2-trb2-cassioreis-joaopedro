@@ -1,5 +1,7 @@
 package a20183.dcc192.trab1joaopcassio;
 
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -19,6 +21,7 @@ public class EventoDet extends AppCompatActivity {
     private ParticipanteAdapter PDetAdapter;
     private Evento eventoAtual;
     private String titulo;
+    private EventoParticipanteDbHelper dbHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,8 +55,22 @@ public class EventoDet extends AppCompatActivity {
         rclDetParticipantes = (RecyclerView) findViewById(R.id.rcl_detParticipantes);
         rclDetParticipantes.setLayoutManager(new LinearLayoutManager(this));
 
-        PDetAdapter = new ParticipanteAdapter(eventoAtual.getParticipantes());
+        PDetAdapter = new ParticipanteAdapter(getEventosParticipantes());
 
         rclDetParticipantes.setAdapter(PDetAdapter);
     }
+
+
+    private Cursor getEventosParticipantes()
+    {
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+        String []visao = {
+                ParticipacaoContract.Participacao.COLUMN_NAME_EVENTO,
+                ParticipacaoContract.Participacao.COLUMN_NAME_PARTICIPANTE,
+
+        };
+        String sort =ParticipacaoContract.Participacao.COLUMN_NAME_PARTICIPANTE+ " ASC";
+        return db.query(ParticipacaoContract.Participacao.TABLE_NAME, visao,null,null,null,null, sort);
+    }
+
 }

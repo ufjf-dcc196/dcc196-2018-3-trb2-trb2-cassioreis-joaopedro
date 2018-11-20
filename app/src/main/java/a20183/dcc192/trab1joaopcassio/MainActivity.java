@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
 
         rclEventos = (RecyclerView) findViewById(R.id.rlc_eventoMain);
         rclEventos.setLayoutManager(new LinearLayoutManager(this));
-        evAdapter = new EventoAdapter(ListaEventos.getInstance());
+        evAdapter = new EventoAdapter(getEventos());
         rclEventos.setAdapter(evAdapter);
 
         btnCadsParticipante.setOnClickListener(new View.OnClickListener() {
@@ -116,5 +116,18 @@ public class MainActivity extends AppCompatActivity {
         };
         String sort = ParticipanteContract.Participante.COLUMN_NAME_NOME+ " ASC";
         return db.query(ParticipanteContract.Participante.TABLE_NAME, visao,null,null,null,null, sort);
+    }
+
+
+    private Cursor getEventos()
+    {
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+        String []visao = {
+                EventoContract.Evento.COLUMN_NAME_DESCRICAO,
+                EventoContract.Evento.COLUMN_NAME_HORA,
+                EventoContract.Evento.COLUMN_NAME_TITULO
+        };
+        String sort = EventoContract.Evento.COLUMN_NAME_ID+ " ASC";
+        return db.query(EventoContract.Evento.TABLE_NAME, visao,null,null,null,null, sort);
     }
 }
