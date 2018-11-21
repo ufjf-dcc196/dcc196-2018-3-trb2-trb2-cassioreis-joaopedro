@@ -25,7 +25,7 @@ class ParticipanteAdapter extends RecyclerView.Adapter<ParticipanteAdapter.ViewH
 
     public void setCursor(Cursor c){
         cursor = c;
-        //notifyDataSetChanged();
+        notifyDataSetChanged();
     }
     public interface OnPartClickListener {
         void onPartClick(View PartView, int position);

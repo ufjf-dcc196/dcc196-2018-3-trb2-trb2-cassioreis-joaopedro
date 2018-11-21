@@ -39,12 +39,14 @@ public class EventoCads extends AppCompatActivity {
 
                 SQLiteDatabase db = MainActivity.dbHelper.getWritableDatabase();
                 ContentValues valores = new ContentValues();
-                valores.put(EventoContract.Evento.COLUMN_NAME_DATA, txtDia.getText().toString());
-                valores.put(EventoContract.Evento.COLUMN_NAME_DESCRICAO, txtDesc.getText().toString());
-                valores.put(EventoContract.Evento.COLUMN_NAME_FACILITADOR, txtFacilitador.getText().toString());
-                valores.put(EventoContract.Evento.COLUMN_NAME_HORA, txtHora.getText().toString());
+
                 valores.put(EventoContract.Evento.COLUMN_NAME_TITULO, txtTitulo.getText().toString());
-                long id = db.insert(EventoContract.Evento.COLUMN_NAME_TITULO,null, valores);
+                valores.put(EventoContract.Evento.COLUMN_NAME_DATA, txtDia.getText().toString());
+                valores.put(EventoContract.Evento.COLUMN_NAME_HORA, txtHora.getText().toString());
+                valores.put(EventoContract.Evento.COLUMN_NAME_FACILITADOR, txtFacilitador.getText().toString());
+                valores.put(EventoContract.Evento.COLUMN_NAME_DESCRICAO, txtDesc.getText().toString());
+
+                long id = db.insert(EventoContract.Evento.TABLE_NAME,null, valores);
                 setResult(Activity.RESULT_OK);
                 finish();
             }
