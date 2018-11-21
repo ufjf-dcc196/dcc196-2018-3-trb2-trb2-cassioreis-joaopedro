@@ -25,11 +25,11 @@ public class MainActivity extends AppCompatActivity {
 
     public static final int CADS_PARTICIPANTE = 1, CADS_EVENTO = 2, DET_PARTICIPANTE = 3, DET_EVENTO = 4, INSC_EVENTO = 5;
     public static final String PARTICIPANTE_NOME = "nome", EVENTO_TITULO = "titulo";
+    public static EventoParticipanteDbHelper dbHelper;
     private Button btnCadsParticipante, btnCadsEvento;
     private RecyclerView rclParticipantes, rclEventos;
     private ParticipanteAdapter PAdapter;
     private EventoAdapter evAdapter;
-    private EventoParticipanteDbHelper dbHelper;
 
 
     @Override
@@ -37,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        dbHelper = new EventoParticipanteDbHelper(getApplicationContext());
         btnCadsParticipante = (Button) findViewById(R.id.btn_cadsParticipanteMain);
         btnCadsEvento = (Button) findViewById(R.id.btn_cadsEventoMain);
 
@@ -111,8 +112,6 @@ public class MainActivity extends AppCompatActivity {
         SQLiteDatabase db = dbHelper.getReadableDatabase();
         String []visao = {
                 ParticipanteContract.Participante.COLUMN_NAME_NOME,
-                ParticipanteContract.Participante.COLUMN_NAME_CPF,
-                ParticipanteContract.Participante.COLUMN_NAME_EMAIL
         };
         String sort = ParticipanteContract.Participante.COLUMN_NAME_NOME+ " ASC";
         return db.query(ParticipanteContract.Participante.TABLE_NAME, visao,null,null,null,null, sort);
@@ -123,11 +122,9 @@ public class MainActivity extends AppCompatActivity {
     {
         SQLiteDatabase db = dbHelper.getReadableDatabase();
         String []visao = {
-                EventoContract.Evento.COLUMN_NAME_DESCRICAO,
-                EventoContract.Evento.COLUMN_NAME_HORA,
                 EventoContract.Evento.COLUMN_NAME_TITULO
         };
-        String sort = EventoContract.Evento.COLUMN_NAME_ID+ " ASC";
+        String sort = EventoContract.Evento.COLUMN_NAME_TITULO+ " ASC";
         return db.query(EventoContract.Evento.TABLE_NAME, visao,null,null,null,null, sort);
     }
 }
