@@ -8,9 +8,11 @@ public class ParticipacaoContract{
         public final static String COLUMN_NAME_EVENTO = "titulo";
         public static final String COLUMN_NAME_PARTICIPANTE = "nome";
         public final static String CREATE_PARTICIPACAO  = "CREATE TABLE "+Participacao.TABLE_NAME+" ("
-                + Participacao.COLUMN_NAME_EVENTO+ " TEXT REFERENCES Evento(titulo), "
-                + Participacao.COLUMN_NAME_PARTICIPANTE+ " TEXT REFERENCES Participante(nome)"
+                + Participacao.COLUMN_NAME_EVENTO+ " TEXT "
+                + Participacao.COLUMN_NAME_PARTICIPANTE+ " TEXT"
                 + "PRIMARY KEY (titulo,nome)"
+                + "FOREIGN KEY(titulo) REFERENCES Evento(titulo), "
+                + "FOREIGN KEY(nome) REFERENCES Participante(nome)"
                 +")";
         public final static String DROP_PARTICIPACAO = "DROP TABLE IF EXISTS "+Participacao.TABLE_NAME;
     }
