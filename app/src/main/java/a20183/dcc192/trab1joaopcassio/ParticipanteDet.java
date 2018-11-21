@@ -1,8 +1,9 @@
-    package a20183.dcc192.trab1joaopcassio;
+package a20183.dcc192.trab1joaopcassio;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -24,6 +25,7 @@ public class ParticipanteDet extends AppCompatActivity {
     private EditText txtDetNome, txtDetEmail, txtDetCpf;
     private RecyclerView rclDetEventos;
     private Button btnDetEvInsc, btnDetEdit;
+
     private EventoAdapter evDetAdapter;
     private List<Evento> eventosParticipando = new ArrayList<Evento>();
     public static Participante participanteAtual;
@@ -44,8 +46,8 @@ public class ParticipanteDet extends AppCompatActivity {
         rclDetEventos = (RecyclerView) findViewById(R.id.rcl_detEventos);
         rclDetEventos.setLayoutManager(new LinearLayoutManager(this));
 
-       //Linha com erro, foi inserido o cursor, verificaar
-        evDetAdapter = new EventoAdapter((Cursor) eventosParticipando);
+        //Linha com erro, foi inserido o cursor, verificaar
+        evDetAdapter = new EventoAdapter(getEventos());
         rclDetEventos.setAdapter(evDetAdapter);
 
         Bundle bundleExtras = getIntent().getExtras();
@@ -120,5 +122,16 @@ public class ParticipanteDet extends AppCompatActivity {
             }
             evDetAdapter.notifyDataSetChanged();
         }
+    }
+
+    private Cursor getEventos()
+    {
+        SQLiteDatabase db = MainActivity.dbHelper.getReadableDatabase();
+        String []visao = {
+                ParticipacaoContract.Participacao.COLUMN_NAME_EVENTO
+        };
+        String sort = ParticipacaoContract.Participacao.COLUMN_NAME_EVENTO+ " ASC";
+        String restricoes = ParticipacaoContract.Participacao.COLUMN_NAME_PARTICIPANTE + " = " + "NOME DO PARTICIPANTE ATUAL";
+        return db.query(EventoContract.Evento.TABLE_NAME, visao,restricoes,null,null,null, sort);
     }
 }
