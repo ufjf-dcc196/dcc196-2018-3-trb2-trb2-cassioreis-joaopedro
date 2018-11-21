@@ -23,6 +23,11 @@ public class EventoAdapter  extends RecyclerView.Adapter<EventoAdapter.ViewHolde
         cursor = c;
     }
 
+    public void setCursor(Cursor c){
+        cursor = c;
+        //notifyDataSetChanged();
+    }
+
     public interface OnEventClickListener {
         void onEventClick(View EventView, int position);
     }

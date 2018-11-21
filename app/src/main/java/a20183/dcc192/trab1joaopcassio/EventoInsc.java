@@ -1,6 +1,7 @@
 package a20183.dcc192.trab1joaopcassio;
 
 import android.app.Activity;
+import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -8,6 +9,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -27,7 +29,7 @@ public class EventoInsc extends AppCompatActivity {
         btn_detInsVoltar = (Button) findViewById(R.id.btn_detInscVoltar);
         rclInsEvento = (RecyclerView) findViewById(R.id.rcl_detInsEv);
         rclInsEvento.setLayoutManager(new LinearLayoutManager(this));
-        EvInscAdapter = new EventoAdapter(ListaEventos.getInstance());
+        EvInscAdapter = new EventoAdapter(getEventos());
         rclInsEvento.setAdapter(EvInscAdapter);
 
         EvInscAdapter.setOnEventClickListener(new EventoAdapter.OnEventClickListener() {
@@ -36,14 +38,13 @@ public class EventoInsc extends AppCompatActivity {
 
                 TextView txtEvTitulo = (TextView) EvView.findViewById(R.id.txt_nomeTitulos);
                 String evInsTitulo = txtEvTitulo.getText().toString();
-                for(int i=0; i <ListaEventos.getInstance().size();i++){
-                    if(evInsTitulo.equals(ListaEventos.getInstance().get(i).getTítulo()) && !ListaEventos.getInstance().get(i).findParticipante(ParticipanteDet.participanteAtual))
-                    {
-                        ListaEventos.getInstance().get(i).addParticipante(ParticipanteDet.participanteAtual);
-                        Toast.makeText(getApplicationContext(), "Inscrito",Toast.LENGTH_SHORT).show();
-                        break;
-                    }
-                }
+
+                SQLiteDatabase db = MainActivity.dbHelper.getWritableDatabase();
+                ContentValues valores = new ContentValues();
+                valores.put(ParticipacaoContract.Participacao.COLUMN_NAME_EVENTO, evInsTitulo);
+                valores.put(ParticipacaoContract.Participacao.COLUMN_NAME_PARTICIPANTE,"NOME DO PARTICIPANTE");//trocar depois
+                long id = db.insert(ParticipacaoContract.Participacao.TABLE_NAME,null, valores);
+                Log.i("DBINFO", "registro criado com id: "+id);
             }
         } );
         btn_detInsVoltar.setOnClickListener(new View.OnClickListener() {
@@ -56,19 +57,13 @@ public class EventoInsc extends AppCompatActivity {
         });
     }
 
-
-/*
-falta fazer essa funcao
-    private Cursor getInsc()
+    private Cursor getEventos()
     {
-        SQLiteDatabase db = dbHelper.getReadableDatabase();
+        SQLiteDatabase db = MainActivity.dbHelper.getReadableDatabase();
         String []visao = {
-                EventoContract.Evento.COLUMN_NAME_DESCRICAO,
-                EventoContract.Evento.COLUMN_NAME_HORA,
                 EventoContract.Evento.COLUMN_NAME_TITULO
         };
-        String sort = EventoContract.Evento.COLUMN_NAME_ID+ " ASC";
+        String sort = EventoContract.Evento.COLUMN_NAME_TITULO+ " ASC";
         return db.query(EventoContract.Evento.TABLE_NAME, visao,null,null,null,null, sort);
     }
-*/
 }

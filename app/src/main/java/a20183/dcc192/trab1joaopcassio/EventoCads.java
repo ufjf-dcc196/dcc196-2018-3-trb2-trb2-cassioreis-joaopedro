@@ -19,7 +19,6 @@ public class EventoCads extends AppCompatActivity {
 
     private Button btnCadastrar;
     private EditText txtTitulo,txtDia,txtHora,txtFacilitador,txtDesc;
-    private EventoParticipanteDbHelper dbHelper;
 
 
     @Override
@@ -38,27 +37,16 @@ public class EventoCads extends AppCompatActivity {
             public void onClick(View v) {
 
 
-                SQLiteDatabase db = dbHelper.getWritableDatabase();
+                SQLiteDatabase db = MainActivity.dbHelper.getWritableDatabase();
                 ContentValues valores = new ContentValues();
                 valores.put(EventoContract.Evento.COLUMN_NAME_DATA, txtDia.getText().toString());
                 valores.put(EventoContract.Evento.COLUMN_NAME_DESCRICAO, txtDesc.getText().toString());
                 valores.put(EventoContract.Evento.COLUMN_NAME_FACILITADOR, txtFacilitador.getText().toString());
                 valores.put(EventoContract.Evento.COLUMN_NAME_HORA, txtHora.getText().toString());
                 valores.put(EventoContract.Evento.COLUMN_NAME_TITULO, txtTitulo.getText().toString());
-                long id = db.insert(EventoContract.Evento.COLUMN_NAME_ID,null, valores);
-                Intent intent = new Intent(EventoCads.this, MainActivity.class);
-                startActivity(intent);
-
-
-                /*
-
-
-                Intent resultado = new Intent();
-                Evento evento = new Evento(txtTitulo.getText().toString(),txtFacilitador.getText().toString(),txtDesc.getText().toString(),txtDia.getText().toString(),txtHora.getText().toString());
-                ListaEventos.getInstance().add(evento);
-                setResult(Activity.RESULT_OK, resultado);
+                long id = db.insert(EventoContract.Evento.COLUMN_NAME_TITULO,null, valores);
+                setResult(Activity.RESULT_OK);
                 finish();
-                */
             }
         });
     }
