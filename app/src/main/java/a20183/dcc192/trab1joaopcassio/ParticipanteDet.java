@@ -28,7 +28,6 @@ public class ParticipanteDet extends AppCompatActivity {
 
     private EventoAdapter evDetAdapter;
     private List<Evento> eventosParticipando = new ArrayList<Evento>();
-    public static Participante participanteAtual;
     private String nome;
 
     @Override
@@ -54,25 +53,10 @@ public class ParticipanteDet extends AppCompatActivity {
         if(bundleExtras!=null)
         {
             nome = bundleExtras.getString("nome");
-            int i;
-            for(i=0 ; i < ListaParticipantes.getInstance().size();i++){
-                if(nome.equals(ListaParticipantes.getInstance().get(i).getNome())){
-                    participanteAtual = ListaParticipantes.getInstance().get(i);
-                    break;
-                }
 
-            }
-            txtDetNome.setText(participanteAtual.getNome());
-            txtDetEmail.setText(participanteAtual.getEmail()) ;
-            txtDetCpf.setText(participanteAtual.getCPF()) ;
+            txtDetNome.setText(nome);
 
 
-            for(int j = 0; j < ListaEventos.getInstance().size(); j++){
-                if(ListaEventos.getInstance().get(j).findParticipante(participanteAtual)){
-                    eventosParticipando.add(ListaEventos.getInstance().get(j));
-                }
-
-            }
             evDetAdapter.notifyDataSetChanged();
         }
         evDetAdapter.setOnEventLongClickListener(new EventoAdapter.OnEventLongClickListener() {
@@ -81,14 +65,7 @@ public class ParticipanteDet extends AppCompatActivity {
 
                 TextView txtTitulo = (TextView) EventView.findViewById(R.id.txt_nomeTitulos);
                 String titulo = txtTitulo.getText().toString();
-                for(int i=0; i<eventosParticipando.size(); i++)
-                {
-                    if(titulo.equals(eventosParticipando.get(i).getTítulo()))
-                    {
-                        eventosParticipando.get(i).getParticipantes().remove(participanteAtual);
-                        eventosParticipando.remove(eventosParticipando.get(i));
-                    }
-                }
+
                 evDetAdapter.notifyItemRemoved(position);
 
             }
@@ -103,9 +80,7 @@ public class ParticipanteDet extends AppCompatActivity {
         btnDetEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                participanteAtual.setNome(txtDetNome.getText().toString());
-                participanteAtual.setEmail(txtDetEmail.getText().toString());
-                participanteAtual.setCPF(txtDetCpf.getText().toString());
+
             }
         });
     }
@@ -114,12 +89,7 @@ public class ParticipanteDet extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
 
         if(requestCode == MainActivity.INSC_EVENTO) {
-            for(int j = 0; j < ListaEventos.getInstance().size(); j++){
-                if(ListaEventos.getInstance().get(j).findParticipante(participanteAtual) && !eventosParticipando.contains(ListaEventos.getInstance().get(j))){
-                    eventosParticipando.add(ListaEventos.getInstance().get(j));
-                }
 
-            }
             evDetAdapter.notifyDataSetChanged();
         }
     }
@@ -131,7 +101,8 @@ public class ParticipanteDet extends AppCompatActivity {
                 ParticipacaoContract.Participacao.COLUMN_NAME_EVENTO
         };
         String sort = ParticipacaoContract.Participacao.COLUMN_NAME_EVENTO+ " ASC";
-        String restricoes = ParticipacaoContract.Participacao.COLUMN_NAME_PARTICIPANTE + " = " + "NOME DO PARTICIPANTE ATUAL";
-        return db.query(EventoContract.Evento.TABLE_NAME, visao,restricoes,null,null,null, sort);
+        String restricoes = ParticipacaoContract.Participacao.COLUMN_NAME_PARTICIPANTE + " = ?";
+        String params[] = {nome};
+        return db.query(ParticipacaoContract.Participacao.TABLE_NAME, visao,restricoes,params,null,null, sort);
     }
 }
