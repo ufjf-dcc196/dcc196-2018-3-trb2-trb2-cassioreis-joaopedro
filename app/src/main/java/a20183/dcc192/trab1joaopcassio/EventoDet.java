@@ -37,6 +37,7 @@ public class EventoDet extends AppCompatActivity {
         if(bundleExtras!=null)
         {
             titulo = bundleExtras.getString("titulo");
+
             Cursor cursor = getEvento();
 
             int intDetData, intDetHora, intDetFacilitador, intDetDesc;
@@ -45,8 +46,8 @@ public class EventoDet extends AppCompatActivity {
             intDetHora = cursor.getColumnIndex(EventoContract.Evento.COLUMN_NAME_HORA);
             intDetFacilitador = cursor.getColumnIndex(EventoContract.Evento.COLUMN_NAME_FACILITADOR);
             intDetDesc = cursor.getColumnIndex(EventoContract.Evento.COLUMN_NAME_DESCRICAO);
-
-            System.out.println(intDetData);
+            
+            cursor.moveToFirst();
 
             txtDetTitulo.setText(titulo);
             txtDetData.setText(cursor.getString(intDetData));
