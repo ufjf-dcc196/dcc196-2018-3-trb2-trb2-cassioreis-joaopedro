@@ -46,19 +46,35 @@ public class ParticipanteDet extends AppCompatActivity {
         rclDetEventos.setLayoutManager(new LinearLayoutManager(this));
 
         //Linha com erro, foi inserido o cursor, verificaar
-        evDetAdapter = new EventoAdapter(getEventos());
-        rclDetEventos.setAdapter(evDetAdapter);
 
         Bundle bundleExtras = getIntent().getExtras();
         if(bundleExtras!=null)
         {
             nome = bundleExtras.getString("nome");
 
+            Cursor cursor = getParticipante();
+
+            int  intDetCPF, intDetEmail;
+
+            intDetCPF = cursor.getColumnIndex(ParticipanteContract.Participante.COLUMN_NAME_CPF);
+            intDetEmail = cursor.getColumnIndex(ParticipanteContract.Participante.COLUMN_NAME_EMAIL);
+
+
+            cursor.moveToFirst();
+
             txtDetNome.setText(nome);
+            txtDetCpf.setText(cursor.getString(intDetCPF));
+            txtDetEmail.setText(cursor.getString(intDetEmail));
 
-
-            evDetAdapter.notifyDataSetChanged();
         }
+
+
+
+        evDetAdapter = new EventoAdapter(getEventos());
+        rclDetEventos.setAdapter(evDetAdapter);
+
+
+
         evDetAdapter.setOnEventLongClickListener(new EventoAdapter.OnEventLongClickListener() {
             @Override
             public void onEventLongClick(View EventView, int position) {
@@ -93,6 +109,23 @@ public class ParticipanteDet extends AppCompatActivity {
             evDetAdapter.notifyDataSetChanged();
         }
     }
+
+
+    private Cursor getParticipante()
+    {
+        SQLiteDatabase db = MainActivity.dbHelper.getReadableDatabase();
+        String []visao = {
+                ParticipanteContract.Participante.COLUMN_NAME_CPF,
+                ParticipanteContract.Participante.COLUMN_NAME_EMAIL
+
+
+        };
+       // String sort = ParticipanteContract.Participante.COLUMN_NAME_EVENTO+ " ASC";
+        String restricoes = ParticipanteContract.Participante.COLUMN_NAME_NOME + " = ?";
+        String params[] = {nome};
+        return db.query(ParticipanteContract.Participante.TABLE_NAME, visao,restricoes,params,null,null,null );
+    }
+
 
     private Cursor getEventos()
     {
