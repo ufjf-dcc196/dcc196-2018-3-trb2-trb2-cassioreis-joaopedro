@@ -1,6 +1,7 @@
 package a20183.dcc192.trab1joaopcassio;
 
 import android.app.Activity;
+import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -8,6 +9,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -103,7 +105,17 @@ public class ParticipanteDet extends AppCompatActivity {
         btnDetEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                SQLiteDatabase db = MainActivity.dbHelper.getWritableDatabase();
+                ContentValues valores = new ContentValues();
+                valores.put(ParticipanteContract.Participante.COLUMN_NAME_NOME, txtDetNome.getText().toString());
+                valores.put(ParticipanteContract.Participante.COLUMN_NAME_CPF, txtDetCpf.getText().toString());
+                valores.put(ParticipanteContract.Participante.COLUMN_NAME_EMAIL, txtDetEmail.getText().toString());
+                String restricoes = ParticipanteContract.Participante.COLUMN_NAME_NOME + " = ?";
+                String params[] = {nome};
+                long id = db.update(ParticipanteContract.Participante.TABLE_NAME, valores,restricoes,params);
+                Log.i("DBINFO", "registro alterado com id: ");
+                setResult(Activity.RESULT_OK);
+                finish();
             }
         });
     }
