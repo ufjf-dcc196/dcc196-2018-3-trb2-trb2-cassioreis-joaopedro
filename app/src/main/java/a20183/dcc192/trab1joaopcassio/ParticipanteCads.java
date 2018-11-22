@@ -34,9 +34,11 @@ public class ParticipanteCads extends AppCompatActivity {
             public void onClick(View v) {
                 SQLiteDatabase db = MainActivity.dbHelper.getWritableDatabase();
                 ContentValues valores = new ContentValues();
+
                 valores.put(ParticipanteContract.Participante.COLUMN_NAME_NOME, txtNome.getText().toString());
                 valores.put(ParticipanteContract.Participante.COLUMN_NAME_CPF, txtCpf.getText().toString());
                 valores.put(ParticipanteContract.Participante.COLUMN_NAME_EMAIL, txtEmail.getText().toString());
+
                 long id = db.insert(ParticipanteContract.Participante.TABLE_NAME,null, valores);
                 Log.i("DBINFO", "registro criado com id: "+id);
                 setResult(Activity.RESULT_OK);

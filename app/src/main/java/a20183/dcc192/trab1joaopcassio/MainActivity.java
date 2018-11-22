@@ -95,13 +95,13 @@ public class MainActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == MainActivity.CADS_PARTICIPANTE && resultCode == Activity.RESULT_OK) {
-            PAdapter.notifyDataSetChanged();
+            PAdapter.setCursor(getParticipantes());
         }
         if (requestCode == MainActivity.CADS_EVENTO && resultCode == Activity.RESULT_OK) {
-            evAdapter.notifyDataSetChanged();
+            evAdapter.setCursor(getEventos());
         }
         if (requestCode == MainActivity.DET_PARTICIPANTE) {
-            PAdapter.notifyDataSetChanged();
+            PAdapter.setCursor(getParticipantes());
         }
 
     }

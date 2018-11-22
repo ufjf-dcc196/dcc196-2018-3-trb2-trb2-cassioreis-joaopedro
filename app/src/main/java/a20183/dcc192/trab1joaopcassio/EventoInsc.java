@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteConstraintException;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -44,7 +45,7 @@ public class EventoInsc extends AppCompatActivity {
             EvInscAdapter.setOnEventClickListener(new EventoAdapter.OnEventClickListener() {
             @Override
             public void onEventClick(View EvView, int position) {
-
+                try {
                 TextView txtEvTitulo = (TextView) EvView.findViewById(R.id.txt_nomeTitulos);
                 String evInsTitulo = txtEvTitulo.getText().toString();
 
@@ -52,8 +53,16 @@ public class EventoInsc extends AppCompatActivity {
                 ContentValues valores = new ContentValues();
                 valores.put(ParticipacaoContract.Participacao.COLUMN_NAME_EVENTO, evInsTitulo);
                 valores.put(ParticipacaoContract.Participacao.COLUMN_NAME_PARTICIPANTE,nome);
-                long id = db.insert(ParticipacaoContract.Participacao.TABLE_NAME,null, valores);
-                Log.i("DBINFO", "registro criado com id: "+id);
+
+
+                    long id = db.insert(ParticipacaoContract.Participacao.TABLE_NAME, null, valores);
+                    Log.i("DBINFO", "registro criado com id: " + id);
+                    Toast.makeText(getApplicationContext(), "Inscrito em evento", Toast.LENGTH_SHORT).show();
+                }
+                catch (SQLiteConstraintException e)
+                {
+                    Toast.makeText(getApplicationContext(), "Já está incrito neste evento", Toast.LENGTH_SHORT).show();
+                }
             }
         } );
         btn_detInsVoltar.setOnClickListener(new View.OnClickListener() {

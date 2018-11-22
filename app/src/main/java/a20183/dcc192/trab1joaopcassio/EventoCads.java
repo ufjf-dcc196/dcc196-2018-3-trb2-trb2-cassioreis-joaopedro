@@ -32,6 +32,7 @@ public class EventoCads extends AppCompatActivity {
         txtHora = (EditText) findViewById(R.id.txt_horaCads);
         txtFacilitador = (EditText) findViewById(R.id.txt_facilitadorCads);
         txtDesc = (EditText) findViewById(R.id.txt_descCads);
+
         btnCadastrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

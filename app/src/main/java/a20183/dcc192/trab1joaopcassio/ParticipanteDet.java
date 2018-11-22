@@ -67,7 +67,6 @@ public class ParticipanteDet extends AppCompatActivity {
             txtDetNome.setText(nome);
             txtDetCpf.setText(cursor.getString(intDetCPF));
             txtDetEmail.setText(cursor.getString(intDetEmail));
-
         }
 
 
@@ -85,11 +84,12 @@ public class ParticipanteDet extends AppCompatActivity {
                 String titulo = txtTitulo.getText().toString();
 
                 SQLiteDatabase db = MainActivity.dbHelper.getReadableDatabase();
-                String restricoes = ParticipanteContract.Participante.COLUMN_NAME_NOME + " = ?";
-                String params[] = {nome};
+                String restricoes = ParticipanteContract.Participante.COLUMN_NAME_NOME + " = ? AND " + ParticipacaoContract.Participacao.COLUMN_NAME_EVENTO + " = ?";
+                String params[] = {nome, titulo};
                 db.delete(ParticipacaoContract.Participacao.TABLE_NAME,restricoes,params);
 
                 evDetAdapter.notifyItemRemoved(position);
+                evDetAdapter.setCursor(getEventos());
 
             }
         });
@@ -106,14 +106,20 @@ public class ParticipanteDet extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 SQLiteDatabase db = MainActivity.dbHelper.getWritableDatabase();
-                ContentValues valores = new ContentValues();
-                valores.put(ParticipanteContract.Participante.COLUMN_NAME_NOME, txtDetNome.getText().toString());
-                valores.put(ParticipanteContract.Participante.COLUMN_NAME_CPF, txtDetCpf.getText().toString());
-                valores.put(ParticipanteContract.Participante.COLUMN_NAME_EMAIL, txtDetEmail.getText().toString());
+                ContentValues valoresParticipante = new ContentValues();
+                ContentValues valoresParticipacao = new ContentValues();
+                valoresParticipante.put(ParticipanteContract.Participante.COLUMN_NAME_NOME, txtDetNome.getText().toString());
+                valoresParticipante.put(ParticipanteContract.Participante.COLUMN_NAME_CPF, txtDetCpf.getText().toString());
+                valoresParticipante.put(ParticipanteContract.Participante.COLUMN_NAME_EMAIL, txtDetEmail.getText().toString());
+
+                valoresParticipacao.put(ParticipacaoContract.Participacao.COLUMN_NAME_PARTICIPANTE, txtDetNome.getText().toString());
+
                 String restricoes = ParticipanteContract.Participante.COLUMN_NAME_NOME + " = ?";
                 String params[] = {nome};
-                long id = db.update(ParticipanteContract.Participante.TABLE_NAME, valores,restricoes,params);
-                Log.i("DBINFO", "registro alterado com id: ");
+
+                long id = db.update(ParticipanteContract.Participante.TABLE_NAME, valoresParticipante,restricoes,params);
+                long id2 = db.update(ParticipacaoContract.Participacao.TABLE_NAME, valoresParticipacao,restricoes,params);
+
                 setResult(Activity.RESULT_OK);
                 finish();
             }
@@ -125,7 +131,7 @@ public class ParticipanteDet extends AppCompatActivity {
 
         if(requestCode == MainActivity.INSC_EVENTO) {
 
-            evDetAdapter.notifyDataSetChanged();
+            evDetAdapter.setCursor(getEventos());
         }
     }
 
@@ -135,12 +141,13 @@ public class ParticipanteDet extends AppCompatActivity {
     {
         SQLiteDatabase db = MainActivity.dbHelper.getReadableDatabase();
         String []visao = {
+                ParticipanteContract.Participante.COLUMN_NAME_NOME,
+                ParticipanteContract.Participante.COLUMN_NAME_EMAIL,
                 ParticipanteContract.Participante.COLUMN_NAME_CPF,
-                ParticipanteContract.Participante.COLUMN_NAME_EMAIL
 
 
         };
-       // String sort = ParticipanteContract.Participante.COLUMN_NAME_EVENTO+ " ASC";
+        String sort = ParticipanteContract.Participante.COLUMN_NAME_NOME+ " ASC";
         String restricoes = ParticipanteContract.Participante.COLUMN_NAME_NOME + " = ?";
         String params[] = {nome};
         return db.query(ParticipanteContract.Participante.TABLE_NAME, visao,restricoes,params,null,null,null );
