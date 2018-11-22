@@ -2,6 +2,7 @@ package a20183.dcc192.trab1joaopcassio;
 
 import android.provider.BaseColumns;
 
+//#Verificar
 public class ParticipacaoContract{
     public final class Participacao implements BaseColumns {
         public final static String TABLE_NAME = "Participacao";
@@ -10,7 +11,7 @@ public class ParticipacaoContract{
         public final static String CREATE_PARTICIPACAO  = "CREATE TABLE "+Participacao.TABLE_NAME+" ("
                 + Participacao.COLUMN_NAME_EVENTO+ " TEXT, "
                 + Participacao.COLUMN_NAME_PARTICIPANTE+ " TEXT,"
-                + "PRIMARY KEY (titulo,nome),"
+              //  + "PRIMARY KEY (titulo,nome),"
                 + "FOREIGN KEY(titulo) REFERENCES Evento(titulo), "
                 + "FOREIGN KEY(nome) REFERENCES Participante(nome)"
                 +")";

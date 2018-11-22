@@ -82,6 +82,11 @@ public class ParticipanteDet extends AppCompatActivity {
                 TextView txtTitulo = (TextView) EventView.findViewById(R.id.txt_nomeTitulos);
                 String titulo = txtTitulo.getText().toString();
 
+                SQLiteDatabase db = MainActivity.dbHelper.getReadableDatabase();
+                String restricoes = ParticipanteContract.Participante.COLUMN_NAME_NOME + " = ?";
+                String params[] = {nome};
+                db.delete(ParticipacaoContract.Participacao.TABLE_NAME,restricoes,params);
+
                 evDetAdapter.notifyItemRemoved(position);
 
             }
@@ -90,7 +95,9 @@ public class ParticipanteDet extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(ParticipanteDet.this, EventoInsc.class);
+                intent.putExtra(String.valueOf(MainActivity.PARTICIPANTE_NOME), txtDetNome.getText().toString());
                 startActivityForResult(intent, MainActivity.INSC_EVENTO);
+
             }
         });
         btnDetEdit.setOnClickListener(new View.OnClickListener() {
@@ -109,6 +116,7 @@ public class ParticipanteDet extends AppCompatActivity {
             evDetAdapter.notifyDataSetChanged();
         }
     }
+
 
 
     private Cursor getParticipante()
