@@ -21,6 +21,8 @@ public class EventoInsc extends AppCompatActivity {
     private RecyclerView rclInsEvento;
     private EventoAdapter EvInscAdapter;
     private Button btn_detInsVoltar;
+    private String nome;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,7 +34,14 @@ public class EventoInsc extends AppCompatActivity {
         EvInscAdapter = new EventoAdapter(getEventos());
         rclInsEvento.setAdapter(EvInscAdapter);
 
-        EvInscAdapter.setOnEventClickListener(new EventoAdapter.OnEventClickListener() {
+
+        Bundle bundleExtras = getIntent().getExtras();
+        if(bundleExtras!=null) {
+            nome = bundleExtras.getString("nome");
+        }
+
+
+            EvInscAdapter.setOnEventClickListener(new EventoAdapter.OnEventClickListener() {
             @Override
             public void onEventClick(View EvView, int position) {
 
@@ -42,7 +51,7 @@ public class EventoInsc extends AppCompatActivity {
                 SQLiteDatabase db = MainActivity.dbHelper.getWritableDatabase();
                 ContentValues valores = new ContentValues();
                 valores.put(ParticipacaoContract.Participacao.COLUMN_NAME_EVENTO, evInsTitulo);
-                valores.put(ParticipacaoContract.Participacao.COLUMN_NAME_PARTICIPANTE,"NOME DO PARTICIPANTE");//trocar depois
+                valores.put(ParticipacaoContract.Participacao.COLUMN_NAME_PARTICIPANTE,nome);
                 long id = db.insert(ParticipacaoContract.Participacao.TABLE_NAME,null, valores);
                 Log.i("DBINFO", "registro criado com id: "+id);
             }
